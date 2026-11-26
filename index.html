@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0f172a">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<title>EZ-Hub TopUp Vault Pro</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🔐</text></svg>">
+<script src="https://accounts.google.com/gsi/client" async defer></script>
+<style>
+:root{--bg:#0f172a;--card:#1e293b;--bd:#334155;--tx:#e2e8f0;--mu:#94a3b8;--ac:#06b6d4;--ok:#10b981;--er:#f43f5e}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--tx);font:15px/1.4 system-ui,"Noto Sans Myanmar","Noto Sans SC",sans-serif;padding:env(safe-area-inset-top) 0 env(safe-area-inset-bottom)}
+header{position:sticky;top:0;z-index:5;background:#020617ee;border-bottom:1px solid var(--bd);padding:10px 12px;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+header h1{font-size:16px;margin:0;flex:1;min-width:150px}header small{display:block;color:var(--mu);font-weight:400;font-size:11px}
+main{max-width:640px;margin:0 auto;padding:12px}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:16px;padding:14px;margin-bottom:12px}
+h2{font-size:15px;margin:0 0 10px}
+input,select,button,textarea{font:inherit;color:var(--tx)}
+input,select{width:100%;padding:10px;border-radius:12px;border:1px solid var(--bd);background:#0f172a;margin-bottom:8px}
+label{font-size:12px;color:var(--mu);display:block;margin-bottom:3px}
+button{border:0;border-radius:12px;padding:10px 14px;background:#334155;cursor:pointer}
+button.p{background:var(--ac);color:#003}button.g{background:var(--ok);color:#012}button.d{background:#4c0519;color:#fecdd3}
+button:disabled{opacity:.5}.row{display:flex;gap:8px}.row>*{flex:1}
+.pill{font-size:11px;padding:6px 10px;border-radius:99px;background:#0f172a;border:1px solid var(--bd)}
+#prev{width:100%;border-radius:12px;margin-bottom:8px;display:none;max-height:300px;object-fit:contain;background:#000}
+.it{display:flex;gap:10px;align-items:center;padding:8px;border:1px solid var(--bd);border-radius:12px;margin-bottom:8px}
+.it img{width:56px;height:56px;object-fit:cover;border-radius:8px;cursor:pointer}.it input{width:auto;margin:0}
+.it .i{flex:1;min-width:0;font-size:13px}.it .i b{font-size:14px}.mu{color:var(--mu);font-size:12px}
+.modal{position:fixed;inset:0;background:#000b;display:none;align-items:center;justify-content:center;padding:14px;z-index:20;overflow:auto}
+.modal>div{background:var(--card);border-radius:16px;padding:16px;width:100%;max-width:480px;max-height:92vh;overflow:auto}
+.modal.on{display:flex}.big{width:100%;border-radius:10px;margin-bottom:8px}
+footer{text-align:center;color:var(--mu);font-size:12px;padding:16px 0 28px}footer a{color:var(--ac);font-weight:700;text-decoration:none}
+#toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:#000e;padding:10px 16px;border-radius:99px;display:none;z-index:30;font-size:13px;max-width:90%}
+textarea{width:100%;background:#0f172a;border:1px solid var(--bd);border-radius:12px;padding:8px;font-size:12px}
+</style></head><body>
+<header>
+ <h1>🔐 EZ-Hub TopUp Vault Pro<small data-i="sub"></small></h1>
+ <select id="lang" style="width:auto;margin:0"><option value="en">English</option><option value="zh">中文</option><option value="my">မြန်မာ</option></select>
+ <button id="bSet">⚙️</button>
+</header>
+<main>
+<div id="viewer" style="display:none">
+ <div class="card"><h2 data-i="vTitle"></h2><div id="vBody" class="mu"></div></div>
+</div>
+<div id="app">
+ <div class="card row" style="align-items:center">
+  <span class="pill" id="st">…</span>
+  <button id="bDrive" class="p" data-i="conn"></button>
+  <button id="bSync" data-i="sync"></button>
+ </div>
+ <div class="card">
+  <h2 data-i="cap"></h2>
+  <input type="file" id="file" accept="image/*" capture="environment" hidden>
+  <input type="file" id="file2" accept="image/*" hidden>
+  <div class="row"><button class="p" id="bCam" data-i="cam"></button><button id="bUp" data-i="up"></button></div>
+  <img id="prev" alt="" style="margin-top:8px">
+  <button id="bScan" class="g" style="width:100%;margin:8px 0;display:none" data-i="scan"></button>
+  <div id="scanSt" class="mu" style="margin-bottom:6px"></div>
+  <label data-i="phone"></label><input id="phone" inputmode="tel">
+  <label data-i="op"></label>
+  <input id="op" list="ops" placeholder="Singtel / StarHub / M1 / MPT / Ooredoo / Telenor / Mytel…">
+  <datalist id="ops"><option>Singtel<option>StarHub<option>M1<option>MPT<option>Ooredoo<option>ATOM<option>Mytel<option>Wave Money<option>KBZPay<option>Western Union</datalist>
+  <div class="row"><div><label data-i="amt"></label><input id="amt" type="number" step="0.01" inputmode="decimal"></div>
+  <div><label data-i="dt"></label><input id="dt" type="datetime-local"></div></div>
+  <label data-i="note"></label><input id="note">
+  <button class="p" id="bSave" style="width:100%" data-i="save"></button>
+ </div>
+ <div class="card">
+  <h2 data-i="vault"></h2><div class="mu" style="margin-bottom:8px" data-i="ret"></div>
+  <input id="q" data-i-ph="search">
+  <div class="row" style="margin-bottom:10px"><button id="bAll" data-i="all"></button><button id="bShare" class="g"><span data-i="share"></span> (<span id="cnt">0</span>)</button></div>
+  <div id="list"></div>
+ </div>
+</div>
+</main>
+<footer><span data-i="dev"></span> <a href="http://facebook.com/kokokuu196" target="_blank" rel="noopener">@KoKoKuu</a><br>EZ-Hub TopUp Vault Pro</footer>
+
+<div class="modal" id="mSet"><div>
+ <h2 data-i="settings"></h2>
+ <label>Google OAuth Client ID</label><input id="cCid" placeholder="xxxx.apps.googleusercontent.com">
+ <label>Google API Key (Drive, for share links)</label><input id="cKey">
+ <label>Gemini API Key (AI scan)</label><input id="cGem" type="password">
+ <p class="mu" data-i="setHelp"></p>
+ <div class="row"><button class="p" id="bCfg" data-i="saveCfg"></button><button data-i="close" onclick="mSet.classList.remove('on')"></button></div>
+</div></div>
+<div class="modal" id="mLink"><div>
+ <h2 data-i="linkT"></h2><p class="mu" data-i="linkD"></p>
+ <textarea id="lnk" rows="5" readonly></textarea>
+ <div class="row" style="margin-top:8px"><button class="p" id="bCopy" data-i="copy"></button><button data-i="close" onclick="mLink.classList.remove('on')"></button></div>
+</div></div>
+<div class="modal" id="mImg"><div id="mImgB"></div></div>
+<div id="toast"></div>
+
+<script>
+const $=id=>document.getElementById(id);
+const T={
+en:{sub:"90-day auto-delete • AES-GCM encrypted links",conn:"Connect Google Drive",sync:"Sync",cap:"Capture Evidence",cam:"📷 Camera",up:"🖼 Upload",scan:"✨ AI Scan & Auto-Fill",phone:"Phone Number / Account",op:"Operator",amt:"Top-up Amount",dt:"Date & Time",note:"Note (optional)",save:"Save to Vault",vault:"Evidence Vault",ret:"Records are auto-deleted after 90 days (3 months).",search:"Search number…",all:"Select all",share:"Share E2EE link",settings:"Settings",setHelp:"Create a Google Cloud OAuth Web Client ID (enable Drive API) and a Gemini API key. Keys are stored only on this phone.",saveCfg:"Save",close:"Close",linkT:"Encrypted Share Link",linkD:"Only people with this full link can decrypt. The key stays in the link (#) and is never sent to any server.",copy:"Copy link",vTitle:"Encrypted Receipt",dev:"Developed by",online:"Drive connected",local:"Local only",none:"No records yet",del:"Delete",saved:"Saved ✔",need:"Add a photo first",scanning:"AI scanning…",scanned:"AI filled the form ✔ please verify",scanErr:"AI scan failed: ",nokey:"Add Gemini API key in ⚙️",nocid:"Add Google Client ID in ⚙️",copied:"Copied ✔",sel:"Select records first",purged:"Auto-deleted expired records: ",decErr:"Cannot decrypt: link invalid, wrong key or expired.",dec:"Decrypting…",left:"days left",synced:"Synced ✔",cfgSaved:"Saved ✔",conf:"Delete this record?"},
+zh:{sub:"90天自动删除 • AES-GCM 加密链接",conn:"连接 Google 云端硬盘",sync:"同步",cap:"拍摄凭证",cam:"📷 相机",up:"🖼 上传",scan:"✨ AI 扫描并自动填写",phone:"手机号码 / 账号",op:"运营商",amt:"充值金额",dt:"日期和时间",note:"备注（可选）",save:"保存到保险库",vault:"凭证保险库",ret:"记录将在90天（3个月）后自动删除。",search:"搜索号码…",all:"全选",share:"分享加密链接",settings:"设置",setHelp:"请创建 Google Cloud OAuth 网页客户端 ID（启用 Drive API）和 Gemini API 密钥。密钥仅保存在本手机。",saveCfg:"保存",close:"关闭",linkT:"加密分享链接",linkD:"只有拥有完整链接的人才能解密。密钥保存在链接(#)中，不会发送到任何服务器。",copy:"复制链接",vTitle:"加密收据",dev:"开发者：",online:"已连接云端硬盘",local:"仅本地",none:"暂无记录",del:"删除",saved:"已保存 ✔",need:"请先添加照片",scanning:"AI 扫描中…",scanned:"AI 已填写，请核对 ✔",scanErr:"AI 扫描失败：",nokey:"请在 ⚙️ 添加 Gemini 密钥",nocid:"请在 ⚙️ 添加 Google 客户端 ID",copied:"已复制 ✔",sel:"请先选择记录",purged:"已自动删除过期记录：",decErr:"无法解密：链接无效、密钥错误或已过期。",dec:"解密中…",left:"天后删除",synced:"已同步 ✔",cfgSaved:"已保存 ✔",conf:"删除此记录？"},
+my:{sub:"၉၀ ရက်အလိုအလျောက်ဖျက် • AES-GCM လျှို့ဝှက်လင့်ခ်",conn:"Google Drive ချိတ်ဆက်ရန်",sync:"ချိန်ညှိ",cap:"အထောက်အထား ရိုက်ယူရန်",cam:"📷 ကင်မရာ",up:"🖼 ဓာတ်ပုံတင်",scan:"✨ AI စကင်ဖတ်၍ ဖြည့်ရန်",phone:"ဖုန်းနံပါတ် / အကောင့်",op:"အော်ပရေတာ",amt:"ငွေဖြည့်ပမာဏ",dt:"ရက်စွဲနှင့် အချိန်",note:"မှတ်ချက် (ရွေးချယ်)",save:"သိမ်းဆည်းရန်",vault:"အထောက်အထား သိုလှောင်ခန်း",ret:"မှတ်တမ်းများကို ၉၀ ရက် (၃ လ) အကြာတွင် အလိုအလျောက်ဖျက်ပါမည်။",search:"နံပါတ်ရှာရန်…",all:"အားလုံးရွေး",share:"E2EE လင့်ခ်မျှဝေ",settings:"ဆက်တင်",setHelp:"Google Cloud OAuth Web Client ID (Drive API ဖွင့်ထားရမည်) နှင့် Gemini API Key ကို ထည့်ပါ။ ဤဖုန်းတွင်သာ သိမ်းထားပါမည်။",saveCfg:"သိမ်းမည်",close:"ပိတ်မည်",linkT:"လျှို့ဝှက်မျှဝေလင့်ခ်",linkD:"လင့်ခ်အပြည့်အစုံရှိသူသာ ဖွင့်ကြည့်နိုင်သည်။ Key သည် လင့်ခ်(#)ထဲတွင်သာရှိပြီး ဆာဗာသို့ မပို့ပါ။",copy:"လင့်ခ်ကူးမည်",vTitle:"လျှို့ဝှက်ပြေစာ",dev:"ဖန်တီးသူ -",online:"Drive ချိတ်ဆက်ပြီး",local:"ဖုန်းထဲတွင်သာ",none:"မှတ်တမ်းမရှိသေးပါ",del:"ဖျက်မည်",saved:"သိမ်းပြီး ✔",need:"ဓာတ်ပုံအရင်ထည့်ပါ",scanning:"AI စကင်ဖတ်နေသည်…",scanned:"AI ဖြည့်ပြီး၊ စစ်ဆေးပါ ✔",scanErr:"AI စကင်မအောင်မြင်: ",nokey:"⚙️ တွင် Gemini Key ထည့်ပါ",nocid:"⚙️ တွင် Google Client ID ထည့်ပါ",copied:"ကူးပြီး ✔",sel:"မှတ်တမ်းအရင်ရွေးပါ",purged:"သက်တမ်းကုန်၍ ဖျက်ပြီး - ",decErr:"ဖွင့်မရပါ - လင့်ခ်မမှန်ပါ၊ key မှားနေသည် သို့မဟုတ် သက်တမ်းကုန်ပြီ။",dec:"ဖွင့်နေသည်…",left:"ရက်ကျန်",synced:"ချိန်ညှိပြီး ✔",cfgSaved:"သိမ်းပြီး ✔",conf:"ဤမှတ်တမ်းကို ဖျက်မလား?"}
+};
+let L=localStorage.lang||'en',cfg=JSON.parse(localStorage.cfg||'{}'),tok=null,tokExp=0,folder=null,recs=[],sel=new Set(),pend=null;
+const t=k=>(T[L]&&T[L][k])||T.en[k]||k;
+const DAY=864e5,TTL=90*DAY;
+function applyLang(){document.documentElement.lang=L;$('lang').value=L;localStorage.lang=L;
+ document.querySelectorAll('[data-i]').forEach(e=>e.textContent=t(e.dataset.i));
+ document.querySelectorAll('[data-i-ph]').forEach(e=>e.placeholder=t(e.dataset.iPh));
+ $('st').textContent=tok?t('online'):t('local');render()}
+function toast(m){const e=$('toast');e.textContent=m;e.style.display='block';clearTimeout(toast.h);toast.h=setTimeout(()=>e.style.display='none',3200)}
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+/* ---------- local DB (IndexedDB) ---------- */
+let db;const idb=()=>db?Promise.resolve(db):new Promise((ok,no)=>{const r=indexedDB.open('ezhub',1);r.onupgradeneeded=()=>r.result.createObjectStore('r',{keyPath:'id'});r.onsuccess=()=>ok(db=r.result);r.onerror=()=>no(r.error)});
+const tx=async(m,f)=>{const d=await idb();return new Promise((ok,no)=>{const s=d.transaction('r',m).objectStore('r');const q=f(s);q.onsuccess=()=>ok(q.result);q.onerror=()=>no(q.error)})};
+const dbAll=()=>tx('readonly',s=>s.getAll()),dbPut=r=>tx('readwrite',s=>s.put(r)),dbDel=id=>tx('readwrite',s=>s.delete(id));
+/* ---------- Google Drive ---------- */
+function auth(){return new Promise((ok,no)=>{
+ if(tok&&Date.now()<tokExp)return ok(tok);
+ if(!cfg.cid){toast(t('nocid'));$('mSet').classList.add('on');return no('cid')}
+ if(!window.google||!google.accounts)return no('gsi');
+ google.accounts.oauth2.initTokenClient({client_id:cfg.cid,scope:'https://www.googleapis.com/auth/drive.file',
+  callback:r=>{if(r.error)return no(r.error);tok=r.access_token;tokExp=Date.now()+(r.expires_in-60)*1000;applyLang();ok(tok)}}).requestAccessToken({prompt:''})})}
+async function dr(path,o={}){const a=await auth();const r=await fetch('https://www.googleapis.com'+path,{...o,headers:{Authorization:'Bearer '+a,...(o.headers||{})}});if(!r.ok)throw new Error('Drive '+r.status);return r}
+async function getFolder(){if(folder)return folder;
+ const q=encodeURIComponent("name='EZ-Hub TopUp Vault' and mimeType='application/vnd.google-apps.folder' and trashed=false");
+ const j=await(await dr('/drive/v3/files?q='+q+'&fields=files(id)')).json();
+ if(j.files[0])return folder=j.files[0].id;
+ const c=await(await dr('/drive/v3/files',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name:'EZ-Hub TopUp Vault',mimeType:'application/vnd.google-apps.folder'})})).json();
+ return folder=c.id}
+async function upload(name,text){const p=await getFolder(),b='ezb'+Date.now();
+ const body=`--${b}\r\nContent-Type: application/json\r\n\r\n${JSON.stringify({name,parents:[p]})}\r\n--${b}\r\nContent-Type: text/plain\r\n\r\n${text}\r\n--${b}--`;
+ const r=await dr('/upload/drive/v3/files?uploadType=multipart&fields=id',{method:'POST',headers:{'Content-Type':'multipart/related; boundary='+b},body});
+ return(await r.json()).id}
+async function purge(){let n=0;const lim=Date.now()-TTL;
+ for(const r of await dbAll())if(r.created<lim){await dbDel(r.id);n++}
+ if(tok){try{const p=await getFolder(),q=encodeURIComponent(`'${p}' in parents and createdTime < '${new Date(lim).toISOString()}' and trashed=false`);
+  const j=await(await dr('/drive/v3/files?q='+q+'&fields=files(id)&pageSize=100')).json();
+  for(const f of j.files){await dr('/drive/v3/files/'+f.id,{method:'DELETE'});n++}}catch(e){}}
+ if(n)toast(t('purged')+n)}
+async function sync(){try{await auth();const p=await getFolder(),q=encodeURIComponent(`'${p}' in parents and name contains 'rec_' and trashed=false`);
+ const j=await(await dr('/drive/v3/files?q='+q+'&fields=files(id)&pageSize=200')).json();
+ const have=new Set((await dbAll()).map(r=>r.fid));
+ for(const f of j.files)if(!have.has(f.id)){const r=await(await dr('/drive/v3/files/'+f.id+'?alt=media')).json();r.fid=f.id;await dbPut(r)}
+ for(const r of await dbAll())if(!r.fid){r.fid=await upload('rec_'+r.id+'.json',JSON.stringify(r));await dbPut(r)}
+ await purge();await load();toast(t('synced'))}catch(e){toast(String(e.message||e))}}
+/* ---------- image + AI ---------- */
+function shrink(file,max=1100,q=.7){return new Promise(ok=>{const im=new Image();im.onload=()=>{const s=Math.min(1,max/Math.max(im.width,im.height)),c=document.createElement('canvas');c.width=im.width*s;c.height=im.height*s;c.getContext('2d').drawImage(im,0,0,c.width,c.height);ok(c.toDataURL('image/jpeg',q))};im.src=URL.createObjectURL(file)})}
+async function picked(f){if(!f)return;pend=await shrink(f);$('prev').src=pend;$('prev').style.display='block';$('bScan').style.display='block';scan()}
+async function scan(){if(!pend)return toast(t('need'));if(!cfg.gem){toast(t('nokey'));return $('mSet').classList.add('on')}
+ $('scanSt').textContent=t('scanning');
+ try{const prompt='This is a mobile top-up / money transfer receipt or screenshot. Extract JSON only: {"phone": digits of the recipient number or account, "operator": telecom operator or payment service name, "amount": number only, "datetime": "YYYY-MM-DDTHH:MM" 24h or empty string}. Use empty string if unknown.';
+  const r=await fetch('https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key='+cfg.gem,{method:'POST',headers:{'Content-Type':'application/json'},
+   body:JSON.stringify({contents:[{parts:[{text:prompt},{inline_data:{mime_type:'image/jpeg',data:pend.split(',')[1]}}]}],generationConfig:{responseMimeType:'application/json'}})});
+  const j=await r.json();if(!r.ok)throw new Error(j.error?.message||r.status);
+  const d=JSON.parse(j.candidates[0].content.parts[0].text.replace(/```json|```/g,''));
+  if(d.phone)$('phone').value=d.phone;if(d.operator)$('op').value=d.operator;if(d.amount)$('amt').value=d.amount;
+  if(d.datetime)$('dt').value=String(d.datetime).slice(0,16);$('scanSt').textContent=t('scanned')}
+ catch(e){$('scanSt').textContent=t('scanErr')+e.message}}
+const nowLocal=()=>{const d=new Date();d.setMinutes(d.getMinutes()-d.getTimezoneOffset());return d.toISOString().slice(0,16)};
+async function save(){if(!pend)return toast(t('need'));
+ const r={id:Date.now()+'',created:Date.now(),img:pend,phone:$('phone').value.trim(),op:$('op').value.trim(),amt:$('amt').value,dt:$('dt').value||nowLocal(),note:$('note').value.trim()};
+ await dbPut(r);if(tok){try{r.fid=await upload('rec_'+r.id+'.json',JSON.stringify(r));await dbPut(r)}catch(e){toast(e.message)}}
+ pend=null;['phone','op','amt','note'].forEach(i=>$(i).value='');$('dt').value=nowLocal();$('prev').style.display='none';$('bScan').style.display='none';$('scanSt').textContent='';
+ toast(t('saved'));load()}
+/* ---------- vault list ---------- */
+async function load(){recs=(await dbAll()).sort((a,b)=>b.created-a.created);render()}
+function render(){const q=$('q').value.trim(),rows=recs.filter(r=>!q||(r.phone+r.op).includes(q));
+ $('list').innerHTML=rows.length?rows.map(r=>`<div class="it"><input type="checkbox" data-id="${r.id}" ${sel.has(r.id)?'checked':''}><img src="${r.img}" data-v="${r.id}"><div class="i"><b>${esc(r.phone)}</b> · ${esc(r.op)}<br>💰 ${esc(r.amt)} <span class="mu">${esc((r.dt||'').replace('T',' '))}</span><br><span class="mu">${Math.max(0,Math.ceil((r.created+TTL-Date.now())/DAY))} ${t('left')}</span></div><button class="d" data-d="${r.id}">🗑</button></div>`).join(''):`<p class="mu">${t('none')}</p>`;
+ $('cnt').textContent=sel.size}
+$('list').onclick=async e=>{const c=e.target;
+ if(c.dataset.id){c.checked?sel.add(c.dataset.id):sel.delete(c.dataset.id);$('cnt').textContent=sel.size}
+ else if(c.dataset.v){const r=recs.find(x=>x.id===c.dataset.v);$('mImgB').innerHTML=`<img class="big" src="${r.img}"><button onclick="mImg.classList.remove('on')">${t('close')}</button>`;$('mImg').classList.add('on')}
+ else if(c.dataset.d&&confirm(t('conf'))){const r=recs.find(x=>x.id===c.dataset.d);await dbDel(r.id);if(r.fid&&tok)try{await dr('/drive/v3/files/'+r.fid,{method:'DELETE'})}catch(e){}sel.delete(r.id);load()}};
+/* ---------- AES-GCM E2EE share ---------- */
+const b64=u=>btoa(String.fromCharCode(...new Uint8Array(u))).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'');
+const unb64=s=>Uint8Array.from(atob(s.replace(/-/g,'+').replace(/_/g,'/')),c=>c.charCodeAt(0));
+async function share(){if(!sel.size)return toast(t('sel'));
+ const data=recs.filter(r=>sel.has(r.id)).map(({img,phone,op,amt,dt,note})=>({img,phone,op,amt,dt,note}));
+ const key=await crypto.subtle.generateKey({name:'AES-GCM',length:256},true,['encrypt']),iv=crypto.getRandomValues(new Uint8Array(12));
+ const ct=await crypto.subtle.encrypt({name:'AES-GCM',iv},key,new TextEncoder().encode(JSON.stringify(data)));
+ const raw=await crypto.subtle.exportKey('raw',key),blob=b64(iv)+'.'+b64(ct),base=location.href.split('#')[0];let link;
+ if(tok){try{const id=await upload('sh_'+Date.now()+'.txt',blob);
+   await dr('/drive/v3/files/'+id+'/permissions',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({role:'reader',type:'anyone'})});
+   link=`${base}#f=${id}&a=${encodeURIComponent(cfg.key||'')}&k=${b64(raw)}`}catch(e){toast(e.message)}}
+ if(!link)link=`${base}#d=${blob}&k=${b64(raw)}`;
+ $('lnk').value=link;$('mLink').classList.add('on')}
+async function openViewer(h){$('app').style.display='none';$('viewer').style.display='block';const v=$('vBody');v.textContent=t('dec');
+ try{const p=new URLSearchParams(h);let blob=p.get('d');
+  if(!blob){const r=await fetch(`https://www.googleapis.com/drive/v3/files/${p.get('f')}?alt=media&key=${p.get('a')}`);if(!r.ok)throw 0;blob=await r.text()}
+  const[iv,ct]=blob.trim().split('.'),key=await crypto.subtle.importKey('raw',unb64(p.get('k')),'AES-GCM',false,['decrypt']);
+  const data=JSON.parse(new TextDecoder().decode(await crypto.subtle.decrypt({name:'AES-GCM',iv:unb64(iv)},key,unb64(ct))));
+  v.innerHTML=data.map(r=>`<div style="margin-bottom:14px"><img class="big" src="${esc(r.img)}"><div style="color:var(--tx)"><b>${esc(r.phone)}</b> · ${esc(r.op)}<br>💰 ${esc(r.amt)} · ${esc((r.dt||'').replace('T',' '))}<br>${esc(r.note)}</div></div>`).join('')}
+ catch(e){v.textContent=t('decErr')}}
+/* ---------- wiring ---------- */
+$('lang').onchange=e=>{L=e.target.value;applyLang()};
+$('bSet').onclick=()=>{$('cCid').value=cfg.cid||'';$('cKey').value=cfg.key||'';$('cGem').value=cfg.gem||'';$('mSet').classList.add('on')};
+$('bCfg').onclick=()=>{cfg={cid:$('cCid').value.trim(),key:$('cKey').value.trim(),gem:$('cGem').value.trim()};localStorage.cfg=JSON.stringify(cfg);$('mSet').classList.remove('on');toast(t('cfgSaved'))};
+$('bCam').onclick=()=>$('file').click();$('bUp').onclick=()=>$('file2').click();
+$('file').onchange=e=>picked(e.target.files[0]);$('file2').onchange=e=>picked(e.target.files[0]);
+$('bScan').onclick=scan;$('bSave').onclick=save;$('bShare').onclick=share;$('q').oninput=render;
+$('bDrive').onclick=sync;$('bSync').onclick=sync;
+$('bAll').onclick=()=>{const q=$('q').value.trim(),rows=recs.filter(r=>!q||(r.phone+r.op).includes(q));rows.every(r=>sel.has(r.id))?sel.clear():rows.forEach(r=>sel.add(r.id));render()};
+$('bCopy').onclick=async()=>{try{await navigator.clipboard.writeText($('lnk').value)}catch(e){$('lnk').select();document.execCommand('copy')}toast(t('copied'))};
+document.querySelectorAll('.modal').forEach(m=>m.addEventListener('click',e=>{if(e.target===m)m.classList.remove('on')}));
+(async()=>{applyLang();$('dt').value=nowLocal();
+ if(/[#&](f|d)=/.test(location.hash))return openViewer(location.hash.slice(1));
+ await purge();await load();
+ if('serviceWorker'in navigator&&location.protocol.startsWith('http')){/* optional: add sw.js for offline */}})();
+</script></body></html>
