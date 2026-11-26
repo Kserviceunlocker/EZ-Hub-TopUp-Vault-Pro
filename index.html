@@ -146,10 +146,12 @@ function shrink(file,max=1100,q=.7){return new Promise(ok=>{const im=new Image()
 async function picked(f){if(!f)return;pend=await shrink(f);$('prev').src=pend;$('prev').style.display='block';$('bScan').style.display='block';scan()}
 async function scan(){if(!pend)return toast(t('need'));if(!cfg.gem){toast(t('nokey'));return $('mSet').classList.add('on')}
  $('scanSt').textContent=t('scanning');
- try{const prompt='This is a mobile top-up / money transfer receipt or screenshot. Extract JSON only: {"phone": digits of the recipient number or account, "operator": telecom operator or payment service name, "amount": number only, "datetime": "YYYY-MM-DDTHH:MM" 24h or empty string}. Use empty string if unknown.';
-  const r=await fetch('https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key='+cfg.gem,{method:'POST',headers:{'Content-Type':'application/json'},
+ try{const prompt='This is a mobile top-up / money transfer receipt or screenshot. Extract JSON only: {"phone": digits of the recipient number or account, "operator": telecom operator or payment service name, "amount": number only, "datetime": "YYYY-MM-DDTHH:MM" 24h or empty string}. For transfer detail screens, phone = the Destination / recipient number (not the Source), amount = the transaction amount shown (positive number), datetime = Transaction Date. Use empty string if unknown.';
+  let j,r,err;for(const m of ['gemini-3.8-flash','gemini-flash-latest']){
+   r=await fetch('https://generativelanguage.googleapis.com/v1beta/models/'+m+':generateContent?key='+cfg.gem,{method:'POST',headers:{'Content-Type':'application/json'},
    body:JSON.stringify({contents:[{parts:[{text:prompt},{inline_data:{mime_type:'image/jpeg',data:pend.split(',')[1]}}]}],generationConfig:{responseMimeType:'application/json'}})});
-  const j=await r.json();if(!r.ok)throw new Error(j.error?.message||r.status);
+   j=await r.json();if(r.ok)break;err=j.error?.message||r.status}
+  if(!r.ok)throw new Error(err);
   const d=JSON.parse(j.candidates[0].content.parts[0].text.replace(/```json|```/g,''));
   if(d.phone)$('phone').value=d.phone;if(d.operator)$('op').value=d.operator;if(d.amount)$('amt').value=d.amount;
   if(d.datetime)$('dt').value=String(d.datetime).slice(0,16);$('scanSt').textContent=t('scanned')}
