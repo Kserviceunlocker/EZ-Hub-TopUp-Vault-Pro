@@ -39,15 +39,18 @@ textarea{width:100%;background:#0a0a0a;border:1px solid var(--bd);border-radius:
 #tabE,#tabR{animation:fi .25s}@keyframes fi{from{opacity:0}}
 .rn{display:flex;gap:8px;align-items:center;margin-bottom:10px}.rn span{flex:1;font:700 17px ui-monospace,monospace;color:var(--ac)}
 .tot{font-size:20px;font-weight:700;color:var(--ac);margin:4px 0 10px}
-.paper{background:#fff;color:#111;padding:18px;border-radius:6px;border-top:6px solid #d4af37;font-size:13px}
-.paper .ph{font-weight:800;letter-spacing:1px;text-align:center;font-size:15px}.paper .ps{text-align:center;color:#8a6d00;font-size:11px;margin-bottom:8px}
-.paper .pn{text-align:center;font:700 15px ui-monospace,monospace;background:#faf3d6;padding:6px;border-radius:4px;margin-bottom:8px}
-.paper .pl{display:flex;justify-content:space-between;gap:10px;padding:3px 0}.paper .pl b{text-align:right}
-.paper .pt{display:flex;justify-content:space-between;font-weight:800;font-size:17px;border-top:2px solid #111;margin-top:6px;padding-top:6px}.paper .pf{text-align:center;color:#777;font-size:11px;margin-top:10px}
+
+.paper{background:#fff;color:#0b1020;padding:22px 20px;border-radius:20px;font-family:ui-monospace,"SF Mono",Menlo,Consolas,monospace;font-size:13px}
+.paper .pb{font-size:32px;font-weight:800;letter-spacing:3px;text-align:center}
+.paper .pa,.paper .ph2{text-align:center;color:#556;font-size:12.5px;margin-top:6px;line-height:1.4}
+.paper .pt2{text-align:center;font-weight:700;margin-top:8px}
+.paper .dash{border-top:2px dashed #d3d9e2;margin:14px 0}.paper .solid{border-top:2px solid #e6e9ef;margin:10px 0 12px}
+.paper .pm{display:flex;justify-content:space-between;gap:8px}.paper .pm small{display:block;color:#8892a6;font-size:11px;letter-spacing:1px}.paper .pm b{font-size:12.5px}
+.paper .pr{display:flex;justify-content:space-between;gap:10px;padding:7px 0;align-items:baseline}.paper .pr span{color:#5b6478}.paper .pr b{text-align:right}
+.paper .tb{display:flex;justify-content:space-between;align-items:center;background:#f0f3f8;border:2px solid #e3e8f0;border-radius:14px;padding:16px;margin-top:12px}.paper .tb span{font-weight:800}.paper .tb b{font-size:24px;color:#2f7d5b}
+.paper .pk{text-align:center;font-weight:800;margin-bottom:6px}.paper .pg{text-align:center;color:#99a1b3;font-size:11.5px}
 @media print{body>*:not(#mRc){display:none!important}#mRc{position:static;background:none;display:block;padding:0}#mRc>div{max-width:none;background:#fff;padding:0}.noprint{display:none!important}}
-</style>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js" defer></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" defer></script></head><body>
+</style></head><body>
 <header>
  <h1>🔐 EZ-Hub TopUp Vault Pro<small data-i="sub"></small></h1>
  <select id="lang" style="width:auto;margin:0"><option value="en">English</option><option value="zh">中文</option><option value="my">မြန်မာ</option></select>
@@ -74,8 +77,8 @@ textarea{width:100%;background:#0a0a0a;border:1px solid var(--bd);border-radius:
   <div id="scanSt" class="mu" style="margin-bottom:6px"></div>
   <label data-i="phone"></label><input id="phone" inputmode="tel">
   <label data-i="op"></label>
-  <input id="op" list="ops" placeholder="Singtel / StarHub / M1 / MPT / Ooredoo / Telenor / Mytel…">
-  <datalist id="ops"><option>Singtel<option>StarHub<option>M1<option>MPT<option>Ooredoo<option>ATOM<option>Mytel<option>Wave Money<option>KBZPay<option>Western Union</datalist>
+  <input id="op" list="ops" placeholder="Singtel Hi / StarHub / M1 / SIMBA…">
+  <datalist id="ops"><option>Singtel Hi<option>Singtel Ultimate Plan<option>StarHub Prepaid<option>M1 Prepaid<option>SIMBA<option>Circles.Life<option>GOMO<option>Giga<option>MyRepublic</datalist>
   <div class="row"><div><label data-i="amt"></label><input id="amt" type="number" step="0.01" inputmode="decimal"></div>
   <div><label data-i="dt"></label><input id="dt" type="datetime-local"></div></div>
   <label data-i="note"></label><input id="note">
@@ -92,9 +95,14 @@ textarea{width:100%;background:#0a0a0a;border:1px solid var(--bd);border-radius:
 <div id="tabR" style="display:none">
  <div class="card"><h2>🧾 <span data-i="rNew"></span></h2>
   <div class="rn"><span id="rno">…</span><button id="bRnd" class="p" style="flex:0;white-space:nowrap">NEW RANDOM #</button></div>
+  <input type="file" id="rf" accept="image/*" capture="environment" hidden><input type="file" id="rf2" accept="image/*" hidden>
+  <div class="row"><button class="p" id="bRCam" data-i="cam"></button><button id="bRUp" data-i="up"></button></div>
+  <div id="rScanSt" class="mu" style="margin:6px 0 10px"></div>
   <label data-i="cust"></label><input id="rcn">
   <label data-i="phone"></label><input id="rph" inputmode="tel">
   <label data-i="device"></label><input id="rdv">
+  <label data-i="op"></label><select id="rop"></select>
+  <label data-i="plan"></label><select id="rpl"></select><input id="rpc" style="display:none" placeholder="Plan name">
   <label data-i="txn"></label><input id="rtx">
   <div class="row"><div><label data-i="qty"></label><input id="rqt" type="number" min="1" value="1" inputmode="numeric"></div><div><label data-i="price"></label><input id="rpr" type="number" step="0.01" inputmode="decimal"></div></div>
   <label data-i="pay"></label><select id="rpm"><option>Cash</option><option>Bank Transfer</option><option>KBZPay</option><option>Wave Money</option><option>PayNow</option><option>Card</option></select>
@@ -132,9 +140,10 @@ en:{sub:"90-day auto-delete • AES-GCM encrypted links",conn:"Connect Google Dr
 zh:{sub:"90天自动删除 • AES-GCM 加密链接",conn:"连接 Google 云端硬盘",sync:"同步",cap:"拍摄凭证",cam:"📷 相机",up:"🖼 上传",scan:"✨ AI 扫描并自动填写",phone:"手机号码 / 账号",op:"运营商",amt:"充值金额",dt:"日期和时间",note:"备注（可选）",save:"保存到保险库",vault:"凭证保险库",ret:"记录将在90天（3个月）后自动删除。",search:"搜索号码…",all:"全选",share:"分享加密链接",settings:"设置",setHelp:"请创建 Google Cloud OAuth 网页客户端 ID（启用 Drive API）和 Gemini API 密钥。密钥仅保存在本手机。",saveCfg:"保存",close:"关闭",linkT:"加密分享链接",linkD:"只有拥有完整链接的人才能解密。密钥保存在链接(#)中，不会发送到任何服务器。",copy:"复制链接",vTitle:"加密收据",dev:"开发者：",online:"已连接云端硬盘",local:"仅本地",none:"暂无记录",del:"删除",saved:"已保存 ✔",need:"请先添加照片",scanning:"AI 扫描中…",scanned:"AI 已填写，请核对 ✔",scanErr:"AI 扫描失败：",nokey:"请在 ⚙️ 添加 Gemini 密钥",nocid:"请在 ⚙️ 添加 Google 客户端 ID",copied:"已复制 ✔",sel:"请先选择记录",purged:"已自动删除过期记录：",decErr:"无法解密：链接无效、密钥错误或已过期。",dec:"解密中…",left:"天后删除",synced:"已同步 ✔",cfgSaved:"已保存 ✔",conf:"删除此记录？"},
 my:{sub:"၉၀ ရက်အလိုအလျောက်ဖျက် • AES-GCM လျှို့ဝှက်လင့်ခ်",conn:"Google Drive ချိတ်ဆက်ရန်",sync:"ချိန်ညှိ",cap:"အထောက်အထား ရိုက်ယူရန်",cam:"📷 ကင်မရာ",up:"🖼 ဓာတ်ပုံတင်",scan:"✨ AI စကင်ဖတ်၍ ဖြည့်ရန်",phone:"ဖုန်းနံပါတ် / အကောင့်",op:"အော်ပရေတာ",amt:"ငွေဖြည့်ပမာဏ",dt:"ရက်စွဲနှင့် အချိန်",note:"မှတ်ချက် (ရွေးချယ်)",save:"သိမ်းဆည်းရန်",vault:"အထောက်အထား သိုလှောင်ခန်း",ret:"မှတ်တမ်းများကို ၉၀ ရက် (၃ လ) အကြာတွင် အလိုအလျောက်ဖျက်ပါမည်။",search:"နံပါတ်ရှာရန်…",all:"အားလုံးရွေး",share:"E2EE လင့်ခ်မျှဝေ",settings:"ဆက်တင်",setHelp:"Google Cloud OAuth Web Client ID (Drive API ဖွင့်ထားရမည်) နှင့် Gemini API Key ကို ထည့်ပါ။ ဤဖုန်းတွင်သာ သိမ်းထားပါမည်။",saveCfg:"သိမ်းမည်",close:"ပိတ်မည်",linkT:"လျှို့ဝှက်မျှဝေလင့်ခ်",linkD:"လင့်ခ်အပြည့်အစုံရှိသူသာ ဖွင့်ကြည့်နိုင်သည်။ Key သည် လင့်ခ်(#)ထဲတွင်သာရှိပြီး ဆာဗာသို့ မပို့ပါ။",copy:"လင့်ခ်ကူးမည်",vTitle:"လျှို့ဝှက်ပြေစာ",dev:"ဖန်တီးသူ -",online:"Drive ချိတ်ဆက်ပြီး",local:"ဖုန်းထဲတွင်သာ",none:"မှတ်တမ်းမရှိသေးပါ",del:"ဖျက်မည်",saved:"သိမ်းပြီး ✔",need:"ဓာတ်ပုံအရင်ထည့်ပါ",scanning:"AI စကင်ဖတ်နေသည်…",scanned:"AI ဖြည့်ပြီး၊ စစ်ဆေးပါ ✔",scanErr:"AI စကင်မအောင်မြင်: ",nokey:"⚙️ တွင် Gemini Key ထည့်ပါ",nocid:"⚙️ တွင် Google Client ID ထည့်ပါ",copied:"ကူးပြီး ✔",sel:"မှတ်တမ်းအရင်ရွေးပါ",purged:"သက်တမ်းကုန်၍ ဖျက်ပြီး - ",decErr:"ဖွင့်မရပါ - လင့်ခ်မမှန်ပါ၊ key မှားနေသည် သို့မဟုတ် သက်တမ်းကုန်ပြီ။",dec:"ဖွင့်နေသည်…",left:"ရက်ကျန်",synced:"ချိန်ညှိပြီး ✔",cfgSaved:"သိမ်းပြီး ✔",conf:"ဤမှတ်တမ်းကို ဖျက်မလား?"}
 };
-Object.assign(T.en,{rNew:"New Receipt",cust:"Customer Name",device:"Device / Model",txn:"Transaction (e.g. Mytel top-up)",qty:"Qty",price:"Unit price",pay:"Payment",total:"Total",rSave:"Save & Generate Receipt",rHist:"Receipt History",print:"Print",pdf:"Save PDF",rSaved:"Receipt saved ✔",rDup:"Could not get a unique number, try again",view:"View",upl:"Uploading original…",upErr:"Upload failed (retry via Sync): ",dl:"Download original",rNeed:"Enter customer, transaction and price",rDate:"Date",today:"Today",soon:"Expiring ≤7d",rsearch:"Search receipt / customer…"});
-Object.assign(T.zh,{rNew:"新收据",cust:"客户姓名",device:"设备 / 型号",txn:"交易内容（如 Mytel 充值）",qty:"数量",price:"单价",pay:"付款方式",total:"总计",rSave:"保存并生成收据",rHist:"收据记录",print:"打印",pdf:"保存 PDF",rSaved:"收据已保存 ✔",rDup:"无法生成唯一编号，请重试",view:"查看",upl:"正在上传原图…",upErr:"上传失败（可同步重试）：",dl:"下载原图",rNeed:"请填写客户、交易和价格",rDate:"日期",today:"今天",soon:"7天内到期",rsearch:"搜索收据 / 客户…"});
-Object.assign(T.my,{rNew:"ပြေစာအသစ်",cust:"ဖောက်သည်အမည်",device:"ဖုန်း / မော်ဒယ်",txn:"ငွေလွှဲ/ငွေဖြည့် အသေးစိတ်",qty:"အရေအတွက်",price:"ယူနစ်စျေး",pay:"ငွေပေးချေမှု",total:"စုစုပေါင်း",rSave:"သိမ်း၍ ပြေစာထုတ်ရန်",rHist:"ပြေစာမှတ်တမ်း",print:"ပရင့်",pdf:"PDF သိမ်း",rSaved:"ပြေစာသိမ်းပြီး ✔",rDup:"ထူးခြားသောနံပါတ် မရပါ၊ ထပ်ကြိုးစားပါ",view:"ကြည့်",upl:"မူရင်းဓာတ်ပုံ တင်နေသည်…",upErr:"တင်မရပါ (Sync ဖြင့် ပြန်ကြိုးစား): ",dl:"မူရင်း ဒေါင်းလုတ်",rNeed:"ဖောက်သည်၊ အရောင်းနှင့် စျေးနှုန်း ဖြည့်ပါ",rDate:"ရက်စွဲ",today:"ယနေ့",soon:"၇ ရက်အတွင်းကုန်",rsearch:"ပြေစာ / ဖောက်သည် ရှာရန်…"});
+Object.assign(T.en,{rNew:"New Receipt",cust:"Customer Name",device:"Device / Model",txn:"Details / Plan",qty:"Qty",price:"Unit price",pay:"Payment",total:"Total",rSave:"Save & Generate Receipt",rHist:"Receipt History",print:"Print",pdf:"Save PDF",rSaved:"Receipt saved ✔",rDup:"Could not get a unique number, try again",view:"View",upl:"Uploading original…",upErr:"Upload failed (retry via Sync): ",dl:"Download original",rNeed:"Enter customer, transaction and price",rDate:"Date",today:"Today",soon:"Expiring ≤7d",rsearch:"Search receipt / customer…"});
+Object.assign(T.zh,{rNew:"新收据",cust:"客户姓名",device:"设备 / 型号",txn:"详情 / 套餐",qty:"数量",price:"单价",pay:"付款方式",total:"总计",rSave:"保存并生成收据",rHist:"收据记录",print:"打印",pdf:"保存 PDF",rSaved:"收据已保存 ✔",rDup:"无法生成唯一编号，请重试",view:"查看",upl:"正在上传原图…",upErr:"上传失败（可同步重试）：",dl:"下载原图",rNeed:"请填写客户、交易和价格",rDate:"日期",today:"今天",soon:"7天内到期",rsearch:"搜索收据 / 客户…"});
+Object.assign(T.my,{rNew:"ပြေစာအသစ်",cust:"ဖောက်သည်အမည်",device:"ဖုန်း / မော်ဒယ်",txn:"အသေးစိတ် / ပလန်",qty:"အရေအတွက်",price:"ယူနစ်စျေး",pay:"ငွေပေးချေမှု",total:"စုစုပေါင်း",rSave:"သိမ်း၍ ပြေစာထုတ်ရန်",rHist:"ပြေစာမှတ်တမ်း",print:"ပရင့်",pdf:"PDF သိမ်း",rSaved:"ပြေစာသိမ်းပြီး ✔",rDup:"ထူးခြားသောနံပါတ် မရပါ၊ ထပ်ကြိုးစားပါ",view:"ကြည့်",upl:"မူရင်းဓာတ်ပုံ တင်နေသည်…",upErr:"တင်မရပါ (Sync ဖြင့် ပြန်ကြိုးစား): ",dl:"မူရင်း ဒေါင်းလုတ်",rNeed:"ဖောက်သည်၊ အရောင်းနှင့် စျေးနှုန်း ဖြည့်ပါ",rDate:"ရက်စွဲ",today:"ယနေ့",soon:"၇ ရက်အတွင်းကုန်",rsearch:"ပြေစာ / ဖောက်သည် ရှာရန်…"});
+Object.assign(T.en,{plan:"Plan type"});Object.assign(T.zh,{plan:"套餐类型"});Object.assign(T.my,{plan:"ပလန်အမျိုးအစား"});
 let L=localStorage.lang||'en',cfg=JSON.parse(localStorage.cfg||'{}'),tok=null,tokExp=0,folder=null,recs=[],sel=new Set(),pend=null;
 const t=k=>(T[L]&&T[L][k])||T.en[k]||k;
 const DAY=864e5,TTL=90*DAY;
@@ -188,33 +197,36 @@ async function sync(){try{await auth();const p=await getFolder(),rf=await getFol
  await purge();await load();await loadRc();toast(t('synced'))}catch(e){toast(String(e.message||e))}}
 /* ---------- image + AI ---------- */
 function shrink(file,max=1100,q=.7){return new Promise(ok=>{const im=new Image();im.onload=()=>{const s=Math.min(1,max/Math.max(im.width,im.height)),c=document.createElement('canvas');c.width=im.width*s;c.height=im.height*s;c.getContext('2d').drawImage(im,0,0,c.width,c.height);ok(c.toDataURL('image/jpeg',q))};im.src=URL.createObjectURL(file)})}
-let orig=null,scanImg=null,dim=[0,0];
-async function picked(f){if(!f)return;orig=f;scanImg=await shrink(f,1400,.8);const u=URL.createObjectURL(f);$('prev').src=u;$('prev').style.display='block';$('bScan').style.display='block';
+let orig=null,scanImg=null,thumb='',dim=[0,0];
+async function picked(f){if(!f)return;orig=f;scanImg=await shrink(f,1400,.8);thumb=await shrink(f,160,.6);const u=URL.createObjectURL(f);$('prev').src=u;$('prev').style.display='block';$('bScan').style.display='block';
  const im=new Image();im.onload=()=>dim=[im.naturalWidth,im.naturalHeight];im.src=u;scan()}
 async function scan(){if(!scanImg)return toast(t('need'));if(!cfg.gem){toast(t('nokey'));return $('mSet').classList.add('on')}
  $('scanSt').textContent=t('scanning');
- try{const prompt='This is a mobile top-up / money transfer receipt or screenshot. Extract JSON only: {"phone": digits of the recipient number or account, "operator": telecom operator or payment service name, "amount": number only, "datetime": "YYYY-MM-DDTHH:MM" 24h or empty string}. For transfer detail screens, phone = the Destination / recipient number (not the Source), amount = the transaction amount shown (positive number), datetime = Transaction Date. Use empty string if unknown.';
+ try{const prompt='This is a mobile top-up / money transfer receipt or screenshot. Extract JSON only: {"phone": digits of the recipient number or account, "operator": Singapore telco (Singtel, StarHub, M1, SIMBA, Circles.Life, GOMO, Giga, MyRepublic) or payment service name, "plan": plan type if shown (e.g. Hi, Ultimate Plan, Prepaid, Tourist) else "", "amount": number only, "datetime": "YYYY-MM-DDTHH:MM" 24h or empty string}. For transfer detail screens, phone = the Destination / recipient number (not the Source), amount = the transaction amount shown (positive number), datetime = Transaction Date. Use empty string if unknown.';
   let j,r,err;for(const m of ['gemini-3.8-flash','gemini-flash-latest']){
    r=await fetch('https://generativelanguage.googleapis.com/v1beta/models/'+m+':generateContent?key='+cfg.gem,{method:'POST',headers:{'Content-Type':'application/json'},
    body:JSON.stringify({contents:[{parts:[{text:prompt},{inline_data:{mime_type:'image/jpeg',data:scanImg.split(',')[1]}}]}],generationConfig:{responseMimeType:'application/json'}})});
    j=await r.json();if(r.ok)break;err=j.error?.message||r.status}
   if(!r.ok)throw new Error(err);
   const d=JSON.parse(j.candidates[0].content.parts[0].text.replace(/```json|```/g,''));
-  if(d.phone)$('phone').value=d.phone;if(d.operator)$('op').value=d.operator;if(d.amount)$('amt').value=d.amount;
+  if(d.phone)$('phone').value=d.phone;if(d.operator)$('op').value=d.operator+(d.plan?' '+d.plan:'');if(d.amount)$('amt').value=d.amount;
   if(d.datetime)$('dt').value=String(d.datetime).slice(0,16);$('scanSt').textContent=t('scanned')}
  catch(e){$('scanSt').textContent=t('scanErr')+e.message}}
 const nowLocal=()=>{const d=new Date();d.setMinutes(d.getMinutes()-d.getTimezoneOffset());return d.toISOString().slice(0,16)};
 async function save(){if(!orig)return toast(t('need'));
- const now=Date.now(),r={id:now+'',created:now,expires:now+TTL,blob:orig,name:orig.name||'photo.jpg',mime:orig.type||'image/jpeg',size:orig.size,w:dim[0],h:dim[1],phone:$('phone').value.trim(),op:$('op').value.trim(),amt:$('amt').value,dt:$('dt').value||nowLocal(),note:$('note').value.trim(),status:'local'};
+ const now=Date.now(),r={id:now+'',created:now,expires:now+TTL,blob:orig,name:orig.name||'photo.jpg',mime:orig.type||'image/jpeg',size:orig.size,thumb,w:dim[0],h:dim[1],phone:$('phone').value.trim(),op:$('op').value.trim(),amt:$('amt').value,dt:$('dt').value||nowLocal(),note:$('note').value.trim(),status:'local'};
  $('bSave').disabled=true;await dbPut(r);
  if(tok){$('scanSt').textContent=t('upl');try{await push(r)}catch(e){r.status='failed';await dbPut(r);toast(t('upErr')+e.message)}}
- orig=scanImg=null;['phone','op','amt','note'].forEach(i=>$(i).value='');$('dt').value=nowLocal();$('prev').style.display='none';$('bScan').style.display='none';$('scanSt').textContent='';
+ orig=scanImg=null;thumb='';['phone','op','amt','note'].forEach(i=>$(i).value='');$('dt').value=nowLocal();$('prev').style.display='none';$('bScan').style.display='none';$('scanSt').textContent='';
  $('bSave').disabled=false;toast(t('saved'));load()}
 /* ---------- vault list ---------- */
 const uc={};const imgSrc=r=>r.img||(uc[r.id]=uc[r.id]||(r.blob?URL.createObjectURL(r.blob):''));
-async function load(){recs=(await dbAll()).sort((a,b)=>b.created-a.created);render()}
+let bf=false;
+async function load(){recs=(await dbAll()).sort((a,b)=>b.created-a.created);render();if(bf)return;bf=true;
+ for(const r of recs)if(!r.thumb&&!r.img&&r.blob){try{r.thumb=await shrink(r.blob,160,.6);await dbPut(r)}catch(e){}}
+ bf=false;render()}
 function render(){const q=$('q').value.trim(),rows=recs.filter(r=>!q||(r.phone+r.op).includes(q));
- $('list').innerHTML=rows.length?rows.map(r=>`<div class="it"><input type="checkbox" data-id="${r.id}" ${sel.has(r.id)?'checked':''}><img src="${imgSrc(r)}" data-v="${r.id}"><div class="i"><b>${esc(r.phone)}</b> ${r.pid||r.fid?"☁️":"📱"} · ${esc(r.op)}<br>💰 ${esc(r.amt)} <span class="mu">${esc((r.dt||'').replace('T',' '))}</span><br><span class="mu">${Math.max(0,Math.ceil((r.created+TTL-Date.now())/DAY))} ${t('left')}</span></div><button class="d" data-d="${r.id}">🗑</button></div>`).join(''):`<p class="mu">${t('none')}</p>`;
+ $('list').innerHTML=rows.length?rows.map(r=>`<div class="it"><input type="checkbox" data-id="${r.id}" ${sel.has(r.id)?'checked':''}><img src="${r.thumb||r.img||''}" loading="lazy" decoding="async" data-v="${r.id}"><div class="i"><b>${esc(r.phone)}</b> ${r.pid||r.fid?"☁️":"📱"} · ${esc(r.op)}<br>💰 ${esc(r.amt)} <span class="mu">${esc((r.dt||'').replace('T',' '))}</span><br><span class="mu">${Math.max(0,Math.ceil((r.created+TTL-Date.now())/DAY))} ${t('left')}</span></div><button class="d" data-d="${r.id}">🗑</button></div>`).join(''):`<p class="mu">${t('none')}</p>`;
  $('cnt').textContent=sel.size;
  const d0=new Date().setHours(0,0,0,0);$('stats').textContent=`${t('vault')}: ${recs.length} • ${t('today')}: ${recs.filter(r=>r.created>=d0).length} • ${t('soon')}: ${recs.filter(r=>r.created+TTL-Date.now()<7*DAY).length}`}
 $('list').onclick=async e=>{const c=e.target;
@@ -251,21 +263,48 @@ async function freshNo(){for(let i=0;i<8;i++){const n=mkNo();if(await rcGet(n))c
 async function newNo(){try{curNo=await freshNo();$('rno').textContent=curNo}catch(e){toast(e.message)}}
 const calc=()=>{const v=(+$('rqt').value||0)*(+$('rpr').value||0);$('rtot').textContent=v.toFixed(2);return v};
 async function saveRc(){const c=$('rcn').value.trim(),x=$('rtx').value.trim(),pr=+$('rpr').value;if(!c||!x||!(pr>0))return toast(t('rNeed'));
- let r=null;for(let i=0;i<6&&!r;i++){const k={no:curNo,created:Date.now(),cust:c,phone:$('rph').value.trim(),dev:$('rdv').value.trim(),txn:x,qty:+$('rqt').value||1,price:pr,pay:$('rpm').value,total:calc()};
+ let r=null;for(let i=0;i<6&&!r;i++){const k={no:curNo,created:Date.now(),cust:c,phone:$('rph').value.trim(),dev:$('rdv').value.trim(),txn:(($('rop').value==='Other'?'':$('rop').value)+' '+x).trim(),op:$('rop').value==='Other'?'':$('rop').value,det:x,qty:+$('rqt').value||1,price:pr,pay:$('rpm').value,total:calc()};
   try{await rcAdd(k);r=k}catch(e){await newNo()}}
  if(!r)return toast(t('rDup'));
  if(tok)try{await pushRc(r)}catch(e){toast(t('upErr')+e.message)}
- ['rcn','rph','rdv','rtx','rpr'].forEach(i=>$(i).value='');$('rqt').value=1;calc();await newNo();await loadRc();showRc(r);toast(t('rSaved'))}
-const rcHTML=r=>`<div class="paper"><div class="ph">EZ-HUB OFFICIAL E-RECEIPT</div><div class="ps">Generated by @KoKoKuu</div><div class="pn">${esc(r.no)}</div>`+[['rDate',new Date(r.created).toLocaleString()],['cust',r.cust],['phone',r.phone],['device',r.dev],['pay',r.pay]].filter(x=>x[1]).map(x=>`<div class="pl"><span>${t(x[0])}</span><b>${esc(x[1])}</b></div>`).join('')+`<hr><div class="pl"><span>${esc(r.txn)}</span><b>${r.qty} × ${(+r.price).toFixed(2)}</b></div><div class="pt"><span>${t('total')}</span><span>${(+r.total).toFixed(2)}</span></div><div class="pf">Thank you • EZ-Hub</div></div>`;
+ ['rcn','rph','rdv','rtx','rpr'].forEach(i=>$(i).value='');$('rqt').value=1;calc();gen();await newNo();await loadRc();showRc(r);toast(t('rSaved'))}
+const BIZ={addr:['84 Bedok North Street 4, #01-67','Singapore 460084'],hrs:'Every day • 9:00 AM — 9:00 PM',tel:'+65 8458 5828 / +65 8728 8093'};
+const rcHTML=r=>{const d=new Date(r.created),dt=d.toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'})+' at '+d.toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit'}),nw=r.op!==undefined;
+ const rows=[['Service / Operator:',nw?(r.op+' Top-up').trim():r.txn],['Mobile / Account:',r.phone],['Details / Plan:',nw?r.det:''],['Customer:',r.cust],['Device:',r.dev],['Payment:',r.pay]];
+ return `<div class="paper"><div class="pb">EZ-HUB</div><div class="pa">${BIZ.addr.map(esc).join('<br>')}</div><div class="ph2">${esc(BIZ.hrs)}</div><div class="pt2">Tel: ${esc(BIZ.tel)}</div><div class="dash"></div><div class="pm"><div><small>RECEIPT NO</small><b>${esc(r.no)}</b></div><div style="text-align:right"><small>DATE &amp; TIME</small><b>${dt}</b></div></div><div class="solid"></div>`
+ +rows.filter(x=>x[1]).map(x=>`<div class="pr"><span>${x[0]}</span><b>${esc(x[1])}</b></div>`).join('')
+ +(r.qty>1?`<div class="pr"><span>Qty × Unit:</span><b>${r.qty} × $${(+r.price).toFixed(2)}</b></div>`:'')
+ +`<div class="tb"><span>TOTAL PAID (SGD)</span><b>$${(+r.total).toFixed(2)}</b></div><div class="dash"></div><div class="pk">THANK YOU FOR YOUR BUSINESS!</div><div class="pg">Receipt Gen by @KoKoKuu • EZ-Hub Singapore</div></div>`};
 function showRc(r){cur=r;$('rcpt').innerHTML=rcHTML(r);$('mRc').classList.add('on')}
 async function loadRc(){rcs=(await rcAll()).sort((a,b)=>b.created-a.created);renderRc()}
 function renderRc(){const q=$('q2').value.trim().toLowerCase(),rows=rcs.filter(r=>!q||(r.no+r.cust+r.phone).toLowerCase().includes(q));
  $('rlist').innerHTML=rows.length?rows.map(r=>`<div class="it"><div class="i"><b>${esc(r.no)}</b> ${r.fid?'☁️':'📱'}<br>${esc(r.cust)} · ${(+r.total).toFixed(2)}<br><span class="mu">${new Date(r.created).toLocaleString()}</span></div><button data-r="${esc(r.no)}">${t('view')}</button></div>`).join(''):`<p class="mu">${t('none')}</p>`}
-async function pdf(){try{const c=await html2canvas($('rcpt'),{scale:2,backgroundColor:'#fff'}),w=80,h=Math.max(40,c.height*w/c.width),d=new window.jspdf.jsPDF({unit:'mm',format:[w,h]});d.addImage(c.toDataURL('image/png'),'PNG',0,0,w,c.height*w/c.width);d.save(cur.no.slice(1)+'.pdf')}catch(e){toast('PDF: '+(e.message||e)+' → '+t('print'))}}
+const lib=u=>new Promise((ok,no)=>{const e=document.createElement('script');e.src=u;e.onload=ok;e.onerror=()=>no(new Error('offline'));document.head.appendChild(e)});
+async function pdf(){try{toast('PDF…');if(!window.html2canvas)await lib('https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js');if(!window.jspdf)await lib('https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js');const c=await html2canvas($('rcpt'),{scale:2,backgroundColor:'#fff'}),w=80,h=Math.max(40,c.height*w/c.width),d=new window.jspdf.jsPDF({unit:'mm',format:[w,h]});d.addImage(c.toDataURL('image/png'),'PNG',0,0,w,c.height*w/c.width);d.save(cur.no.slice(1)+'.pdf')}catch(e){toast('PDF: '+(e.message||e)+' → '+t('print'))}}
 function tab(n){$('tabE').style.display=n?'none':'block';$('tabR').style.display=n?'block':'none';$('tE').classList.toggle('on',!n);$('tR').classList.toggle('on',!!n);localStorage.tab=n;if(n&&!curNo)newNo()}
-$('bRnd').onclick=newNo;$('bRSave').onclick=saveRc;$('rqt').oninput=$('rpr').oninput=calc;$('q2').oninput=renderRc;
+$('bRnd').onclick=newNo;$('bRSave').onclick=saveRc;$('rqt').oninput=calc;$('rpr').oninput=()=>{calc();gen()};$('rop').onchange=fillPlans;$('rpl').onchange=gen;$('rpc').oninput=gen;$('q2').oninput=renderRc;
 $('rlist').onclick=e=>{const n=e.target.dataset.r;if(n)showRc(rcs.find(r=>r.no===n))};
 $('bPrint').onclick=()=>window.print();$('bPdf').onclick=pdf;
+/* Singapore operators + plan generator */
+const SG={Singtel:['Hi','Ultimate Plan','Tourist','Top-up'],StarHub:['Prepaid','Tourist','Top-up'],M1:['Prepaid','Tourist','Top-up'],Simba:['Prepaid','TPG SIMBA Ez','Top-up'],'Circles.Life':['Plan','Top-up'],GOMO:['Plan','Top-up'],Giga:['Plan','Top-up'],MyRepublic:['Plan','Top-up'],Other:['Top-up']};
+function fillPlans(){$('rpl').innerHTML=[...SG[$('rop').value],'Custom…'].map(p=>`<option>${p}</option>`).join('');gen()}
+function gen(){const c=$('rpl').value==='Custom…';$('rpc').style.display=c?'block':'none';const p=c?$('rpc').value.trim():$('rpl').value,a=+$('rpr').value;
+ $('rtx').value=[p,a>0?'$'+(a%1?a.toFixed(2):a):'',p&&p!=='Top-up'?'plan':''].filter(Boolean).join(' ')}
+$('rop').innerHTML=Object.keys(SG).map(k=>`<option>${k}</option>`).join('');fillPlans();
+/* AI fill for receipts (photo is only read, never stored) */
+async function ai(img){const prompt='This is a mobile top-up / money transfer receipt or screenshot. Extract JSON only: {"phone": recipient/destination number or account (digits), "name": customer name if shown else "", "operator": Singapore telco (Singtel, StarHub, M1, SIMBA, Circles.Life, GOMO, Giga, MyRepublic) or other name, "plan": plan type shown (e.g. Hi, Ultimate Plan, Prepaid, Tourist, Top-up) else "", "amount": positive number only, "datetime": "YYYY-MM-DDTHH:MM" or ""}. Use empty string if unknown.';
+ let r,j,err;for(const m of ['gemini-3.8-flash','gemini-flash-latest']){
+  r=await fetch('https://generativelanguage.googleapis.com/v1beta/models/'+m+':generateContent?key='+cfg.gem,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({contents:[{parts:[{text:prompt},{inline_data:{mime_type:'image/jpeg',data:img.split(',')[1]}}]}],generationConfig:{responseMimeType:'application/json'}})});
+  j=await r.json();if(r.ok)break;err=j.error?.message||r.status}
+ if(!r.ok)throw new Error(err);return JSON.parse(j.candidates[0].content.parts[0].text.replace(/```json|```/g,''))}
+async function rscan(f){if(!f)return;if(!cfg.gem){toast(t('nokey'));return $('mSet').classList.add('on')}
+ $('rScanSt').textContent=t('scanning');
+ try{const d=await ai(await shrink(f,1400,.8));if(d.phone)$('rph').value=d.phone;if(d.name)$('rcn').value=d.name;const od=String(d.operator||'').toLowerCase();$('rop').value=Object.keys(SG).find(k=>od.includes(k.toLowerCase()))||'Other';fillPlans();
+ if(d.plan){const p=[...$('rpl').options].find(x=>x.value.toLowerCase()===String(d.plan).toLowerCase());if(p)$('rpl').value=p.value;else{$('rpl').value='Custom…';$('rpc').value=d.plan}}
+ if(d.amount)$('rpr').value=d.amount;calc();gen();$('rScanSt').textContent=t('scanned')}
+ catch(e){$('rScanSt').textContent=t('scanErr')+e.message}}
+const rh=e=>{rscan(e.target.files[0]);e.target.value=''};
+$('bRCam').onclick=()=>$('rf').click();$('bRUp').onclick=()=>$('rf2').click();$('rf').onchange=rh;$('rf2').onchange=rh;
 /* ---------- wiring ---------- */
 $('lang').onchange=e=>{L=e.target.value;applyLang()};
 $('bSet').onclick=()=>{$('cCid').value=cfg.cid||'';$('cKey').value=cfg.key||'';$('cGem').value=cfg.gem||'';$('mSet').classList.add('on')};
