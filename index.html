@@ -2,26 +2,26 @@
 <html lang="en"><head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#0f172a">
+<meta name="theme-color" content="#0a0a0a">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <title>EZ-Hub TopUp Vault Pro</title>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🔐</text></svg>">
 <script src="https://accounts.google.com/gsi/client" async defer></script>
 <style>
-:root{--bg:#0f172a;--card:#1e293b;--bd:#334155;--tx:#e2e8f0;--mu:#94a3b8;--ac:#06b6d4;--ok:#10b981;--er:#f43f5e}
+:root{--bg:#000;--card:#111;--bd:#3a3015;--tx:#f5efe0;--mu:#a39a80;--ac:#d4af37;--ok:#b8962e;--er:#f43f5e}
 *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--tx);font:15px/1.4 system-ui,"Noto Sans Myanmar","Noto Sans SC",sans-serif;padding:env(safe-area-inset-top) 0 env(safe-area-inset-bottom)}
-header{position:sticky;top:0;z-index:5;background:#020617ee;border-bottom:1px solid var(--bd);padding:10px 12px;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+header{position:sticky;top:0;z-index:5;background:#000e;border-bottom:1px solid var(--bd);padding:10px 12px;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
 header h1{font-size:16px;margin:0;flex:1;min-width:150px}header small{display:block;color:var(--mu);font-weight:400;font-size:11px}
 main{max-width:640px;margin:0 auto;padding:12px}
 .card{background:var(--card);border:1px solid var(--bd);border-radius:16px;padding:14px;margin-bottom:12px}
 h2{font-size:15px;margin:0 0 10px}
 input,select,button,textarea{font:inherit;color:var(--tx)}
-input,select{width:100%;padding:10px;border-radius:12px;border:1px solid var(--bd);background:#0f172a;margin-bottom:8px}
+input,select{width:100%;padding:10px;border-radius:12px;border:1px solid var(--bd);background:#0a0a0a;margin-bottom:8px}
 label{font-size:12px;color:var(--mu);display:block;margin-bottom:3px}
-button{border:0;border-radius:12px;padding:10px 14px;background:#334155;cursor:pointer}
-button.p{background:var(--ac);color:#003}button.g{background:var(--ok);color:#012}button.d{background:#4c0519;color:#fecdd3}
+button{border:0;border-radius:12px;padding:10px 14px;background:#2a2415;cursor:pointer}
+button.p{background:var(--ac);color:#000;font-weight:700}button.g{background:var(--ok);color:#000;font-weight:700}button.d{background:#4c0519;color:#fecdd3}
 button:disabled{opacity:.5}.row{display:flex;gap:8px}.row>*{flex:1}
-.pill{font-size:11px;padding:6px 10px;border-radius:99px;background:#0f172a;border:1px solid var(--bd)}
+.pill{font-size:11px;padding:6px 10px;border-radius:99px;background:#0a0a0a;border:1px solid var(--bd)}
 #prev{width:100%;border-radius:12px;margin-bottom:8px;display:none;max-height:300px;object-fit:contain;background:#000}
 .it{display:flex;gap:10px;align-items:center;padding:8px;border:1px solid var(--bd);border-radius:12px;margin-bottom:8px}
 .it img{width:56px;height:56px;object-fit:cover;border-radius:8px;cursor:pointer}.it input{width:auto;margin:0}
@@ -31,18 +31,34 @@ button:disabled{opacity:.5}.row{display:flex;gap:8px}.row>*{flex:1}
 .modal.on{display:flex}.big{width:100%;border-radius:10px;margin-bottom:8px}
 footer{text-align:center;color:var(--mu);font-size:12px;padding:16px 0 28px}footer a{color:var(--ac);font-weight:700;text-decoration:none}
 #toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:#000e;padding:10px 16px;border-radius:99px;display:none;z-index:30;font-size:13px;max-width:90%}
-textarea{width:100%;background:#0f172a;border:1px solid var(--bd);border-radius:12px;padding:8px;font-size:12px}
-</style></head><body>
+textarea{width:100%;background:#0a0a0a;border:1px solid var(--bd);border-radius:12px;padding:8px;font-size:12px}
+
+.tabs{display:flex;background:#000;border-bottom:1px solid var(--bd)}
+.tabs button{flex:1;border-radius:0;background:#000;color:var(--mu);font-weight:700;font-size:12px;padding:12px 6px;border-bottom:3px solid transparent}
+.tabs button.on{color:var(--ac);border-color:var(--ac)}
+#tabE,#tabR{animation:fi .25s}@keyframes fi{from{opacity:0}}
+.rn{display:flex;gap:8px;align-items:center;margin-bottom:10px}.rn span{flex:1;font:700 17px ui-monospace,monospace;color:var(--ac)}
+.tot{font-size:20px;font-weight:700;color:var(--ac);margin:4px 0 10px}
+.paper{background:#fff;color:#111;padding:18px;border-radius:6px;border-top:6px solid #d4af37;font-size:13px}
+.paper .ph{font-weight:800;letter-spacing:1px;text-align:center;font-size:15px}.paper .ps{text-align:center;color:#8a6d00;font-size:11px;margin-bottom:8px}
+.paper .pn{text-align:center;font:700 15px ui-monospace,monospace;background:#faf3d6;padding:6px;border-radius:4px;margin-bottom:8px}
+.paper .pl{display:flex;justify-content:space-between;gap:10px;padding:3px 0}.paper .pl b{text-align:right}
+.paper .pt{display:flex;justify-content:space-between;font-weight:800;font-size:17px;border-top:2px solid #111;margin-top:6px;padding-top:6px}.paper .pf{text-align:center;color:#777;font-size:11px;margin-top:10px}
+@media print{body>*:not(#mRc){display:none!important}#mRc{position:static;background:none;display:block;padding:0}#mRc>div{max-width:none;background:#fff;padding:0}.noprint{display:none!important}}
+</style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" defer></script></head><body>
 <header>
  <h1>🔐 EZ-Hub TopUp Vault Pro<small data-i="sub"></small></h1>
  <select id="lang" style="width:auto;margin:0"><option value="en">English</option><option value="zh">中文</option><option value="my">မြန်မာ</option></select>
  <button id="bSet">⚙️</button>
 </header>
+<nav class="tabs"><button id="tE" class="on" onclick="tab(0)">🛡️ CLOUD EVIDENCE VAULT</button><button id="tR" onclick="tab(1)">🧾 RECEIPT GEN BY @KoKoKuu</button></nav>
 <main>
 <div id="viewer" style="display:none">
  <div class="card"><h2 data-i="vTitle"></h2><div id="vBody" class="mu"></div></div>
 </div>
-<div id="app">
+<div id="app"><div id="tabE">
  <div class="card row" style="align-items:center">
   <span class="pill" id="st">…</span>
   <button id="bDrive" class="p" data-i="conn"></button>
@@ -67,10 +83,26 @@ textarea{width:100%;background:#0f172a;border:1px solid var(--bd);border-radius:
  </div>
  <div class="card">
   <h2 data-i="vault"></h2><div class="mu" style="margin-bottom:8px" data-i="ret"></div>
+  <div id="stats" class="mu" style="margin-bottom:8px"></div>
   <input id="q" data-i-ph="search">
   <div class="row" style="margin-bottom:10px"><button id="bAll" data-i="all"></button><button id="bShare" class="g"><span data-i="share"></span> (<span id="cnt">0</span>)</button></div>
   <div id="list"></div>
  </div>
+</div>
+<div id="tabR" style="display:none">
+ <div class="card"><h2>🧾 <span data-i="rNew"></span></h2>
+  <div class="rn"><span id="rno">…</span><button id="bRnd" class="p" style="flex:0;white-space:nowrap">NEW RANDOM #</button></div>
+  <label data-i="cust"></label><input id="rcn">
+  <label data-i="phone"></label><input id="rph" inputmode="tel">
+  <label data-i="device"></label><input id="rdv">
+  <label data-i="txn"></label><input id="rtx">
+  <div class="row"><div><label data-i="qty"></label><input id="rqt" type="number" min="1" value="1" inputmode="numeric"></div><div><label data-i="price"></label><input id="rpr" type="number" step="0.01" inputmode="decimal"></div></div>
+  <label data-i="pay"></label><select id="rpm"><option>Cash</option><option>Bank Transfer</option><option>KBZPay</option><option>Wave Money</option><option>PayNow</option><option>Card</option></select>
+  <div class="tot"><span data-i="total"></span>: <span id="rtot">0.00</span></div>
+  <button class="p" id="bRSave" style="width:100%" data-i="rSave"></button>
+ </div>
+ <div class="card"><h2 data-i="rHist"></h2><input id="q2" data-i-ph="rsearch"><div id="rlist"></div></div>
+</div>
 </div>
 </main>
 <footer><span data-i="dev"></span> <a href="http://facebook.com/kokokuu196" target="_blank" rel="noopener">@KoKoKuu</a><br>EZ-Hub TopUp Vault Pro</footer>
@@ -89,6 +121,8 @@ textarea{width:100%;background:#0f172a;border:1px solid var(--bd);border-radius:
  <div class="row" style="margin-top:8px"><button class="p" id="bCopy" data-i="copy"></button><button data-i="close" onclick="mLink.classList.remove('on')"></button></div>
 </div></div>
 <div class="modal" id="mImg"><div id="mImgB"></div></div>
+<div class="modal" id="mRc"><div><div id="rcpt"></div>
+ <div class="row noprint" style="margin-top:10px"><button class="p" id="bPrint" data-i="print"></button><button class="g" id="bPdf" data-i="pdf"></button><button data-i="close" onclick="mRc.classList.remove('on')"></button></div></div></div>
 <div id="toast"></div>
 
 <script>
@@ -98,6 +132,9 @@ en:{sub:"90-day auto-delete • AES-GCM encrypted links",conn:"Connect Google Dr
 zh:{sub:"90天自动删除 • AES-GCM 加密链接",conn:"连接 Google 云端硬盘",sync:"同步",cap:"拍摄凭证",cam:"📷 相机",up:"🖼 上传",scan:"✨ AI 扫描并自动填写",phone:"手机号码 / 账号",op:"运营商",amt:"充值金额",dt:"日期和时间",note:"备注（可选）",save:"保存到保险库",vault:"凭证保险库",ret:"记录将在90天（3个月）后自动删除。",search:"搜索号码…",all:"全选",share:"分享加密链接",settings:"设置",setHelp:"请创建 Google Cloud OAuth 网页客户端 ID（启用 Drive API）和 Gemini API 密钥。密钥仅保存在本手机。",saveCfg:"保存",close:"关闭",linkT:"加密分享链接",linkD:"只有拥有完整链接的人才能解密。密钥保存在链接(#)中，不会发送到任何服务器。",copy:"复制链接",vTitle:"加密收据",dev:"开发者：",online:"已连接云端硬盘",local:"仅本地",none:"暂无记录",del:"删除",saved:"已保存 ✔",need:"请先添加照片",scanning:"AI 扫描中…",scanned:"AI 已填写，请核对 ✔",scanErr:"AI 扫描失败：",nokey:"请在 ⚙️ 添加 Gemini 密钥",nocid:"请在 ⚙️ 添加 Google 客户端 ID",copied:"已复制 ✔",sel:"请先选择记录",purged:"已自动删除过期记录：",decErr:"无法解密：链接无效、密钥错误或已过期。",dec:"解密中…",left:"天后删除",synced:"已同步 ✔",cfgSaved:"已保存 ✔",conf:"删除此记录？"},
 my:{sub:"၉၀ ရက်အလိုအလျောက်ဖျက် • AES-GCM လျှို့ဝှက်လင့်ခ်",conn:"Google Drive ချိတ်ဆက်ရန်",sync:"ချိန်ညှိ",cap:"အထောက်အထား ရိုက်ယူရန်",cam:"📷 ကင်မရာ",up:"🖼 ဓာတ်ပုံတင်",scan:"✨ AI စကင်ဖတ်၍ ဖြည့်ရန်",phone:"ဖုန်းနံပါတ် / အကောင့်",op:"အော်ပရေတာ",amt:"ငွေဖြည့်ပမာဏ",dt:"ရက်စွဲနှင့် အချိန်",note:"မှတ်ချက် (ရွေးချယ်)",save:"သိမ်းဆည်းရန်",vault:"အထောက်အထား သိုလှောင်ခန်း",ret:"မှတ်တမ်းများကို ၉၀ ရက် (၃ လ) အကြာတွင် အလိုအလျောက်ဖျက်ပါမည်။",search:"နံပါတ်ရှာရန်…",all:"အားလုံးရွေး",share:"E2EE လင့်ခ်မျှဝေ",settings:"ဆက်တင်",setHelp:"Google Cloud OAuth Web Client ID (Drive API ဖွင့်ထားရမည်) နှင့် Gemini API Key ကို ထည့်ပါ။ ဤဖုန်းတွင်သာ သိမ်းထားပါမည်။",saveCfg:"သိမ်းမည်",close:"ပိတ်မည်",linkT:"လျှို့ဝှက်မျှဝေလင့်ခ်",linkD:"လင့်ခ်အပြည့်အစုံရှိသူသာ ဖွင့်ကြည့်နိုင်သည်။ Key သည် လင့်ခ်(#)ထဲတွင်သာရှိပြီး ဆာဗာသို့ မပို့ပါ။",copy:"လင့်ခ်ကူးမည်",vTitle:"လျှို့ဝှက်ပြေစာ",dev:"ဖန်တီးသူ -",online:"Drive ချိတ်ဆက်ပြီး",local:"ဖုန်းထဲတွင်သာ",none:"မှတ်တမ်းမရှိသေးပါ",del:"ဖျက်မည်",saved:"သိမ်းပြီး ✔",need:"ဓာတ်ပုံအရင်ထည့်ပါ",scanning:"AI စကင်ဖတ်နေသည်…",scanned:"AI ဖြည့်ပြီး၊ စစ်ဆေးပါ ✔",scanErr:"AI စကင်မအောင်မြင်: ",nokey:"⚙️ တွင် Gemini Key ထည့်ပါ",nocid:"⚙️ တွင် Google Client ID ထည့်ပါ",copied:"ကူးပြီး ✔",sel:"မှတ်တမ်းအရင်ရွေးပါ",purged:"သက်တမ်းကုန်၍ ဖျက်ပြီး - ",decErr:"ဖွင့်မရပါ - လင့်ခ်မမှန်ပါ၊ key မှားနေသည် သို့မဟုတ် သက်တမ်းကုန်ပြီ။",dec:"ဖွင့်နေသည်…",left:"ရက်ကျန်",synced:"ချိန်ညှိပြီး ✔",cfgSaved:"သိမ်းပြီး ✔",conf:"ဤမှတ်တမ်းကို ဖျက်မလား?"}
 };
+Object.assign(T.en,{rNew:"New Receipt",cust:"Customer Name",device:"Device / Model",txn:"Transaction (e.g. Mytel top-up)",qty:"Qty",price:"Unit price",pay:"Payment",total:"Total",rSave:"Save & Generate Receipt",rHist:"Receipt History",print:"Print",pdf:"Save PDF",rSaved:"Receipt saved ✔",rDup:"Could not get a unique number, try again",view:"View",upl:"Uploading original…",upErr:"Upload failed (retry via Sync): ",dl:"Download original",rNeed:"Enter customer, transaction and price",rDate:"Date",today:"Today",soon:"Expiring ≤7d",rsearch:"Search receipt / customer…"});
+Object.assign(T.zh,{rNew:"新收据",cust:"客户姓名",device:"设备 / 型号",txn:"交易内容（如 Mytel 充值）",qty:"数量",price:"单价",pay:"付款方式",total:"总计",rSave:"保存并生成收据",rHist:"收据记录",print:"打印",pdf:"保存 PDF",rSaved:"收据已保存 ✔",rDup:"无法生成唯一编号，请重试",view:"查看",upl:"正在上传原图…",upErr:"上传失败（可同步重试）：",dl:"下载原图",rNeed:"请填写客户、交易和价格",rDate:"日期",today:"今天",soon:"7天内到期",rsearch:"搜索收据 / 客户…"});
+Object.assign(T.my,{rNew:"ပြေစာအသစ်",cust:"ဖောက်သည်အမည်",device:"ဖုန်း / မော်ဒယ်",txn:"ငွေလွှဲ/ငွေဖြည့် အသေးစိတ်",qty:"အရေအတွက်",price:"ယူနစ်စျေး",pay:"ငွေပေးချေမှု",total:"စုစုပေါင်း",rSave:"သိမ်း၍ ပြေစာထုတ်ရန်",rHist:"ပြေစာမှတ်တမ်း",print:"ပရင့်",pdf:"PDF သိမ်း",rSaved:"ပြေစာသိမ်းပြီး ✔",rDup:"ထူးခြားသောနံပါတ် မရပါ၊ ထပ်ကြိုးစားပါ",view:"ကြည့်",upl:"မူရင်းဓာတ်ပုံ တင်နေသည်…",upErr:"တင်မရပါ (Sync ဖြင့် ပြန်ကြိုးစား): ",dl:"မူရင်း ဒေါင်းလုတ်",rNeed:"ဖောက်သည်၊ အရောင်းနှင့် စျေးနှုန်း ဖြည့်ပါ",rDate:"ရက်စွဲ",today:"ယနေ့",soon:"၇ ရက်အတွင်းကုန်",rsearch:"ပြေစာ / ဖောက်သည် ရှာရန်…"});
 let L=localStorage.lang||'en',cfg=JSON.parse(localStorage.cfg||'{}'),tok=null,tokExp=0,folder=null,recs=[],sel=new Set(),pend=null;
 const t=k=>(T[L]&&T[L][k])||T.en[k]||k;
 const DAY=864e5,TTL=90*DAY;
@@ -108,9 +145,10 @@ function applyLang(){document.documentElement.lang=L;$('lang').value=L;localStor
 function toast(m){const e=$('toast');e.textContent=m;e.style.display='block';clearTimeout(toast.h);toast.h=setTimeout(()=>e.style.display='none',3200)}
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 /* ---------- local DB (IndexedDB) ---------- */
-let db;const idb=()=>db?Promise.resolve(db):new Promise((ok,no)=>{const r=indexedDB.open('ezhub',1);r.onupgradeneeded=()=>r.result.createObjectStore('r',{keyPath:'id'});r.onsuccess=()=>ok(db=r.result);r.onerror=()=>no(r.error)});
-const tx=async(m,f)=>{const d=await idb();return new Promise((ok,no)=>{const s=d.transaction('r',m).objectStore('r');const q=f(s);q.onsuccess=()=>ok(q.result);q.onerror=()=>no(q.error)})};
-const dbAll=()=>tx('readonly',s=>s.getAll()),dbPut=r=>tx('readwrite',s=>s.put(r)),dbDel=id=>tx('readwrite',s=>s.delete(id));
+let db;const idb=()=>db?Promise.resolve(db):new Promise((ok,no)=>{const r=indexedDB.open('ezhub',2);r.onupgradeneeded=()=>{const d=r.result;if(!d.objectStoreNames.contains('r'))d.createObjectStore('r',{keyPath:'id'});if(!d.objectStoreNames.contains('rc'))d.createObjectStore('rc',{keyPath:'no'})};r.onsuccess=()=>ok(db=r.result);r.onerror=()=>no(r.error)});
+const tx=async(st,m,f)=>{const d=await idb();return new Promise((ok,no)=>{const q=f(d.transaction(st,m).objectStore(st));q.onsuccess=()=>ok(q.result);q.onerror=e=>{e.preventDefault&&e.preventDefault();no(q.error)}})};
+const dbAll=()=>tx('r','readonly',s=>s.getAll()),dbPut=r=>tx('r','readwrite',s=>s.put(r)),dbDel=id=>tx('r','readwrite',s=>s.delete(id));
+const rcAll=()=>tx('rc','readonly',s=>s.getAll()),rcAdd=r=>tx('rc','readwrite',s=>s.add(r)),rcGet=n=>tx('rc','readonly',s=>s.get(n));
 /* ---------- Google Drive ---------- */
 function auth(){return new Promise((ok,no)=>{
  if(tok&&Date.now()<tokExp)return ok(tok);
@@ -119,14 +157,15 @@ function auth(){return new Promise((ok,no)=>{
  google.accounts.oauth2.initTokenClient({client_id:cfg.cid,scope:'https://www.googleapis.com/auth/drive.file',
   callback:r=>{if(r.error)return no(r.error);tok=r.access_token;tokExp=Date.now()+(r.expires_in-60)*1000;applyLang();ok(tok)}}).requestAccessToken({prompt:''})})}
 async function dr(path,o={}){const a=await auth();const r=await fetch('https://www.googleapis.com'+path,{...o,headers:{Authorization:'Bearer '+a,...(o.headers||{})}});if(!r.ok)throw new Error('Drive '+r.status);return r}
-async function getFolder(){if(folder)return folder;
- const q=encodeURIComponent("name='EZ-Hub TopUp Vault' and mimeType='application/vnd.google-apps.folder' and trashed=false");
+const fcache={};
+async function getFolder(name='EZ-Hub TopUp Vault'){if(fcache[name])return fcache[name];
+ const q=encodeURIComponent(`name='${name}' and mimeType='application/vnd.google-apps.folder' and trashed=false`);
  const j=await(await dr('/drive/v3/files?q='+q+'&fields=files(id)')).json();
- if(j.files[0])return folder=j.files[0].id;
- const c=await(await dr('/drive/v3/files',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name:'EZ-Hub TopUp Vault',mimeType:'application/vnd.google-apps.folder'})})).json();
- return folder=c.id}
-async function upload(name,text){const p=await getFolder(),b='ezb'+Date.now();
- const body=`--${b}\r\nContent-Type: application/json\r\n\r\n${JSON.stringify({name,parents:[p]})}\r\n--${b}\r\nContent-Type: text/plain\r\n\r\n${text}\r\n--${b}--`;
+ if(j.files[0])return fcache[name]=j.files[0].id;
+ const c=await(await dr('/drive/v3/files',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name,mimeType:'application/vnd.google-apps.folder'})})).json();
+ return fcache[name]=c.id}
+async function upload(name,data,mime='text/plain',fold){const p=await getFolder(fold),b='ezb'+Date.now();
+ const body=new Blob([`--${b}\r\nContent-Type: application/json\r\n\r\n${JSON.stringify({name,parents:[p]})}\r\n--${b}\r\nContent-Type: ${mime}\r\n\r\n`,data,`\r\n--${b}--`]);
  const r=await dr('/upload/drive/v3/files?uploadType=multipart&fields=id',{method:'POST',headers:{'Content-Type':'multipart/related; boundary='+b},body});
  return(await r.json()).id}
 async function purge(){let n=0;const lim=Date.now()-TTL;
@@ -135,21 +174,29 @@ async function purge(){let n=0;const lim=Date.now()-TTL;
   const j=await(await dr('/drive/v3/files?q='+q+'&fields=files(id)&pageSize=100')).json();
   for(const f of j.files){await dr('/drive/v3/files/'+f.id,{method:'DELETE'});n++}}catch(e){}}
  if(n)toast(t('purged')+n)}
-async function sync(){try{await auth();const p=await getFolder(),q=encodeURIComponent(`'${p}' in parents and name contains 'rec_' and trashed=false`);
- const j=await(await dr('/drive/v3/files?q='+q+'&fields=files(id)&pageSize=200')).json();
+async function push(r){if(r.blob&&!r.pid)r.pid=await upload('ev_'+r.id+'_'+(r.name||'photo.jpg').replace(/[^\w.-]/g,'_'),r.blob,r.mime||'image/jpeg');
+ const{blob,...m}=r;r.fid=await upload('rec_'+r.id+'.json',JSON.stringify(m),'application/json');r.status='synced';await dbPut(r)}
+async function pushRc(r){const{fid,...m}=r;r.fid=await upload('rc_'+r.no.slice(1)+'.json',JSON.stringify(m),'application/json','EZ-Hub Receipts');await tx('rc','readwrite',s=>s.put(r))}
+async function sync(){try{await auth();const p=await getFolder(),rf=await getFolder('EZ-Hub Receipts');
+ const ls=async(f,pre)=>(await(await dr('/drive/v3/files?q='+encodeURIComponent(`'${f}' in parents and name contains '${pre}' and trashed=false`)+'&fields=files(id)&pageSize=200')).json()).files;
  const have=new Set((await dbAll()).map(r=>r.fid));
- for(const f of j.files)if(!have.has(f.id)){const r=await(await dr('/drive/v3/files/'+f.id+'?alt=media')).json();r.fid=f.id;await dbPut(r)}
- for(const r of await dbAll())if(!r.fid){r.fid=await upload('rec_'+r.id+'.json',JSON.stringify(r));await dbPut(r)}
- await purge();await load();toast(t('synced'))}catch(e){toast(String(e.message||e))}}
+ for(const f of await ls(p,'rec_'))if(!have.has(f.id)){const r=await(await dr('/drive/v3/files/'+f.id+'?alt=media')).json();r.fid=f.id;if(r.pid&&!r.img)r.blob=await(await dr('/drive/v3/files/'+r.pid+'?alt=media')).blob();await dbPut(r)}
+ for(const r of await dbAll())if(!r.fid)await push(r);
+ const hr=new Set((await rcAll()).map(r=>r.no));
+ for(const f of await ls(rf,'rc_')){const r=await(await dr('/drive/v3/files/'+f.id+'?alt=media')).json();if(!hr.has(r.no)){r.fid=f.id;await rcAdd(r)}}
+ for(const r of await rcAll())if(!r.fid)await pushRc(r);
+ await purge();await load();await loadRc();toast(t('synced'))}catch(e){toast(String(e.message||e))}}
 /* ---------- image + AI ---------- */
 function shrink(file,max=1100,q=.7){return new Promise(ok=>{const im=new Image();im.onload=()=>{const s=Math.min(1,max/Math.max(im.width,im.height)),c=document.createElement('canvas');c.width=im.width*s;c.height=im.height*s;c.getContext('2d').drawImage(im,0,0,c.width,c.height);ok(c.toDataURL('image/jpeg',q))};im.src=URL.createObjectURL(file)})}
-async function picked(f){if(!f)return;pend=await shrink(f);$('prev').src=pend;$('prev').style.display='block';$('bScan').style.display='block';scan()}
-async function scan(){if(!pend)return toast(t('need'));if(!cfg.gem){toast(t('nokey'));return $('mSet').classList.add('on')}
+let orig=null,scanImg=null,dim=[0,0];
+async function picked(f){if(!f)return;orig=f;scanImg=await shrink(f,1400,.8);const u=URL.createObjectURL(f);$('prev').src=u;$('prev').style.display='block';$('bScan').style.display='block';
+ const im=new Image();im.onload=()=>dim=[im.naturalWidth,im.naturalHeight];im.src=u;scan()}
+async function scan(){if(!scanImg)return toast(t('need'));if(!cfg.gem){toast(t('nokey'));return $('mSet').classList.add('on')}
  $('scanSt').textContent=t('scanning');
  try{const prompt='This is a mobile top-up / money transfer receipt or screenshot. Extract JSON only: {"phone": digits of the recipient number or account, "operator": telecom operator or payment service name, "amount": number only, "datetime": "YYYY-MM-DDTHH:MM" 24h or empty string}. For transfer detail screens, phone = the Destination / recipient number (not the Source), amount = the transaction amount shown (positive number), datetime = Transaction Date. Use empty string if unknown.';
   let j,r,err;for(const m of ['gemini-3.8-flash','gemini-flash-latest']){
    r=await fetch('https://generativelanguage.googleapis.com/v1beta/models/'+m+':generateContent?key='+cfg.gem,{method:'POST',headers:{'Content-Type':'application/json'},
-   body:JSON.stringify({contents:[{parts:[{text:prompt},{inline_data:{mime_type:'image/jpeg',data:pend.split(',')[1]}}]}],generationConfig:{responseMimeType:'application/json'}})});
+   body:JSON.stringify({contents:[{parts:[{text:prompt},{inline_data:{mime_type:'image/jpeg',data:scanImg.split(',')[1]}}]}],generationConfig:{responseMimeType:'application/json'}})});
    j=await r.json();if(r.ok)break;err=j.error?.message||r.status}
   if(!r.ok)throw new Error(err);
   const d=JSON.parse(j.candidates[0].content.parts[0].text.replace(/```json|```/g,''));
@@ -157,25 +204,28 @@ async function scan(){if(!pend)return toast(t('need'));if(!cfg.gem){toast(t('nok
   if(d.datetime)$('dt').value=String(d.datetime).slice(0,16);$('scanSt').textContent=t('scanned')}
  catch(e){$('scanSt').textContent=t('scanErr')+e.message}}
 const nowLocal=()=>{const d=new Date();d.setMinutes(d.getMinutes()-d.getTimezoneOffset());return d.toISOString().slice(0,16)};
-async function save(){if(!pend)return toast(t('need'));
- const r={id:Date.now()+'',created:Date.now(),img:pend,phone:$('phone').value.trim(),op:$('op').value.trim(),amt:$('amt').value,dt:$('dt').value||nowLocal(),note:$('note').value.trim()};
- await dbPut(r);if(tok){try{r.fid=await upload('rec_'+r.id+'.json',JSON.stringify(r));await dbPut(r)}catch(e){toast(e.message)}}
- pend=null;['phone','op','amt','note'].forEach(i=>$(i).value='');$('dt').value=nowLocal();$('prev').style.display='none';$('bScan').style.display='none';$('scanSt').textContent='';
- toast(t('saved'));load()}
+async function save(){if(!orig)return toast(t('need'));
+ const now=Date.now(),r={id:now+'',created:now,expires:now+TTL,blob:orig,name:orig.name||'photo.jpg',mime:orig.type||'image/jpeg',size:orig.size,w:dim[0],h:dim[1],phone:$('phone').value.trim(),op:$('op').value.trim(),amt:$('amt').value,dt:$('dt').value||nowLocal(),note:$('note').value.trim(),status:'local'};
+ $('bSave').disabled=true;await dbPut(r);
+ if(tok){$('scanSt').textContent=t('upl');try{await push(r)}catch(e){r.status='failed';await dbPut(r);toast(t('upErr')+e.message)}}
+ orig=scanImg=null;['phone','op','amt','note'].forEach(i=>$(i).value='');$('dt').value=nowLocal();$('prev').style.display='none';$('bScan').style.display='none';$('scanSt').textContent='';
+ $('bSave').disabled=false;toast(t('saved'));load()}
 /* ---------- vault list ---------- */
+const uc={};const imgSrc=r=>r.img||(uc[r.id]=uc[r.id]||(r.blob?URL.createObjectURL(r.blob):''));
 async function load(){recs=(await dbAll()).sort((a,b)=>b.created-a.created);render()}
 function render(){const q=$('q').value.trim(),rows=recs.filter(r=>!q||(r.phone+r.op).includes(q));
- $('list').innerHTML=rows.length?rows.map(r=>`<div class="it"><input type="checkbox" data-id="${r.id}" ${sel.has(r.id)?'checked':''}><img src="${r.img}" data-v="${r.id}"><div class="i"><b>${esc(r.phone)}</b> · ${esc(r.op)}<br>💰 ${esc(r.amt)} <span class="mu">${esc((r.dt||'').replace('T',' '))}</span><br><span class="mu">${Math.max(0,Math.ceil((r.created+TTL-Date.now())/DAY))} ${t('left')}</span></div><button class="d" data-d="${r.id}">🗑</button></div>`).join(''):`<p class="mu">${t('none')}</p>`;
- $('cnt').textContent=sel.size}
+ $('list').innerHTML=rows.length?rows.map(r=>`<div class="it"><input type="checkbox" data-id="${r.id}" ${sel.has(r.id)?'checked':''}><img src="${imgSrc(r)}" data-v="${r.id}"><div class="i"><b>${esc(r.phone)}</b> ${r.pid||r.fid?"☁️":"📱"} · ${esc(r.op)}<br>💰 ${esc(r.amt)} <span class="mu">${esc((r.dt||'').replace('T',' '))}</span><br><span class="mu">${Math.max(0,Math.ceil((r.created+TTL-Date.now())/DAY))} ${t('left')}</span></div><button class="d" data-d="${r.id}">🗑</button></div>`).join(''):`<p class="mu">${t('none')}</p>`;
+ $('cnt').textContent=sel.size;
+ const d0=new Date().setHours(0,0,0,0);$('stats').textContent=`${t('vault')}: ${recs.length} • ${t('today')}: ${recs.filter(r=>r.created>=d0).length} • ${t('soon')}: ${recs.filter(r=>r.created+TTL-Date.now()<7*DAY).length}`}
 $('list').onclick=async e=>{const c=e.target;
  if(c.dataset.id){c.checked?sel.add(c.dataset.id):sel.delete(c.dataset.id);$('cnt').textContent=sel.size}
- else if(c.dataset.v){const r=recs.find(x=>x.id===c.dataset.v);$('mImgB').innerHTML=`<img class="big" src="${r.img}"><button onclick="mImg.classList.remove('on')">${t('close')}</button>`;$('mImg').classList.add('on')}
- else if(c.dataset.d&&confirm(t('conf'))){const r=recs.find(x=>x.id===c.dataset.d);await dbDel(r.id);if(r.fid&&tok)try{await dr('/drive/v3/files/'+r.fid,{method:'DELETE'})}catch(e){}sel.delete(r.id);load()}};
+ else if(c.dataset.v){const r=recs.find(x=>x.id===c.dataset.v);$('mImgB').innerHTML=`<img class="big" src="${imgSrc(r)}"><div class="mu" style="margin-bottom:8px">${esc(r.name||'')} ${r.w?r.w+'×'+r.h:''} ${r.size?(r.size/1048576).toFixed(2)+' MB':''}<br>${new Date(r.created).toLocaleString()} → ${new Date(r.created+TTL).toLocaleDateString()}</div><div class="row"><a href="${imgSrc(r)}" download="${esc(r.name||'evidence.jpg')}"><button class="p" style="width:100%">${t('dl')}</button></a><button onclick="mImg.classList.remove('on')">${t('close')}</button></div>`;$('mImg').classList.add('on')}
+ else if(c.dataset.d&&confirm(t('conf'))){const r=recs.find(x=>x.id===c.dataset.d);await dbDel(r.id);if(tok)for(const x of [r.fid,r.pid])if(x)try{await dr('/drive/v3/files/'+x,{method:'DELETE'})}catch(e){}sel.delete(r.id);load()}};
 /* ---------- AES-GCM E2EE share ---------- */
 const b64=u=>btoa(String.fromCharCode(...new Uint8Array(u))).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'');
 const unb64=s=>Uint8Array.from(atob(s.replace(/-/g,'+').replace(/_/g,'/')),c=>c.charCodeAt(0));
 async function share(){if(!sel.size)return toast(t('sel'));
- const data=recs.filter(r=>sel.has(r.id)).map(({img,phone,op,amt,dt,note})=>({img,phone,op,amt,dt,note}));
+ const data=await Promise.all(recs.filter(r=>sel.has(r.id)).map(async r=>({img:r.img||await shrink(r.blob),phone:r.phone,op:r.op,amt:r.amt,dt:r.dt,note:r.note})));
  const key=await crypto.subtle.generateKey({name:'AES-GCM',length:256},true,['encrypt']),iv=crypto.getRandomValues(new Uint8Array(12));
  const ct=await crypto.subtle.encrypt({name:'AES-GCM',iv},key,new TextEncoder().encode(JSON.stringify(data)));
  const raw=await crypto.subtle.exportKey('raw',key),blob=b64(iv)+'.'+b64(ct),base=location.href.split('#')[0];let link;
@@ -191,6 +241,31 @@ async function openViewer(h){$('app').style.display='none';$('viewer').style.dis
   const data=JSON.parse(new TextDecoder().decode(await crypto.subtle.decrypt({name:'AES-GCM',iv:unb64(iv)},key,unb64(ct))));
   v.innerHTML=data.map(r=>`<div style="margin-bottom:14px"><img class="big" src="${esc(r.img)}"><div style="color:var(--tx)"><b>${esc(r.phone)}</b> · ${esc(r.op)}<br>💰 ${esc(r.amt)} · ${esc((r.dt||'').replace('T',' '))}<br>${esc(r.note)}</div></div>`).join('')}
  catch(e){v.textContent=t('decErr')}}
+/* ---------- receipt generator ---------- */
+const AL='ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';let curNo='',cur=null,rcs=[];
+function rnd(){let o='';const a=crypto.getRandomValues(new Uint8Array(32));for(const v of a){if(v<252)o+=AL[v%36];if(o.length===6)return o}return rnd()}
+const mkNo=()=>{const d=new Date(),p=n=>String(n).padStart(2,'0');return '#EZ-'+p(d.getFullYear()%100)+p(d.getMonth()+1)+p(d.getDate())+'-'+rnd()};
+async function freshNo(){for(let i=0;i<8;i++){const n=mkNo();if(await rcGet(n))continue;
+ if(tok)try{const f=await getFolder('EZ-Hub Receipts'),j=await(await dr('/drive/v3/files?q='+encodeURIComponent(`'${f}' in parents and name='rc_${n.slice(1)}.json' and trashed=false`)+'&fields=files(id)')).json();if(j.files.length)continue}catch(e){}
+ return n}throw new Error(t('rDup'))}
+async function newNo(){try{curNo=await freshNo();$('rno').textContent=curNo}catch(e){toast(e.message)}}
+const calc=()=>{const v=(+$('rqt').value||0)*(+$('rpr').value||0);$('rtot').textContent=v.toFixed(2);return v};
+async function saveRc(){const c=$('rcn').value.trim(),x=$('rtx').value.trim(),pr=+$('rpr').value;if(!c||!x||!(pr>0))return toast(t('rNeed'));
+ let r=null;for(let i=0;i<6&&!r;i++){const k={no:curNo,created:Date.now(),cust:c,phone:$('rph').value.trim(),dev:$('rdv').value.trim(),txn:x,qty:+$('rqt').value||1,price:pr,pay:$('rpm').value,total:calc()};
+  try{await rcAdd(k);r=k}catch(e){await newNo()}}
+ if(!r)return toast(t('rDup'));
+ if(tok)try{await pushRc(r)}catch(e){toast(t('upErr')+e.message)}
+ ['rcn','rph','rdv','rtx','rpr'].forEach(i=>$(i).value='');$('rqt').value=1;calc();await newNo();await loadRc();showRc(r);toast(t('rSaved'))}
+const rcHTML=r=>`<div class="paper"><div class="ph">EZ-HUB OFFICIAL E-RECEIPT</div><div class="ps">Generated by @KoKoKuu</div><div class="pn">${esc(r.no)}</div>`+[['rDate',new Date(r.created).toLocaleString()],['cust',r.cust],['phone',r.phone],['device',r.dev],['pay',r.pay]].filter(x=>x[1]).map(x=>`<div class="pl"><span>${t(x[0])}</span><b>${esc(x[1])}</b></div>`).join('')+`<hr><div class="pl"><span>${esc(r.txn)}</span><b>${r.qty} × ${(+r.price).toFixed(2)}</b></div><div class="pt"><span>${t('total')}</span><span>${(+r.total).toFixed(2)}</span></div><div class="pf">Thank you • EZ-Hub</div></div>`;
+function showRc(r){cur=r;$('rcpt').innerHTML=rcHTML(r);$('mRc').classList.add('on')}
+async function loadRc(){rcs=(await rcAll()).sort((a,b)=>b.created-a.created);renderRc()}
+function renderRc(){const q=$('q2').value.trim().toLowerCase(),rows=rcs.filter(r=>!q||(r.no+r.cust+r.phone).toLowerCase().includes(q));
+ $('rlist').innerHTML=rows.length?rows.map(r=>`<div class="it"><div class="i"><b>${esc(r.no)}</b> ${r.fid?'☁️':'📱'}<br>${esc(r.cust)} · ${(+r.total).toFixed(2)}<br><span class="mu">${new Date(r.created).toLocaleString()}</span></div><button data-r="${esc(r.no)}">${t('view')}</button></div>`).join(''):`<p class="mu">${t('none')}</p>`}
+async function pdf(){try{const c=await html2canvas($('rcpt'),{scale:2,backgroundColor:'#fff'}),w=80,h=Math.max(40,c.height*w/c.width),d=new window.jspdf.jsPDF({unit:'mm',format:[w,h]});d.addImage(c.toDataURL('image/png'),'PNG',0,0,w,c.height*w/c.width);d.save(cur.no.slice(1)+'.pdf')}catch(e){toast('PDF: '+(e.message||e)+' → '+t('print'))}}
+function tab(n){$('tabE').style.display=n?'none':'block';$('tabR').style.display=n?'block':'none';$('tE').classList.toggle('on',!n);$('tR').classList.toggle('on',!!n);localStorage.tab=n;if(n&&!curNo)newNo()}
+$('bRnd').onclick=newNo;$('bRSave').onclick=saveRc;$('rqt').oninput=$('rpr').oninput=calc;$('q2').oninput=renderRc;
+$('rlist').onclick=e=>{const n=e.target.dataset.r;if(n)showRc(rcs.find(r=>r.no===n))};
+$('bPrint').onclick=()=>window.print();$('bPdf').onclick=pdf;
 /* ---------- wiring ---------- */
 $('lang').onchange=e=>{L=e.target.value;applyLang()};
 $('bSet').onclick=()=>{$('cCid').value=cfg.cid||'';$('cKey').value=cfg.key||'';$('cGem').value=cfg.gem||'';$('mSet').classList.add('on')};
@@ -204,6 +279,6 @@ $('bCopy').onclick=async()=>{try{await navigator.clipboard.writeText($('lnk').va
 document.querySelectorAll('.modal').forEach(m=>m.addEventListener('click',e=>{if(e.target===m)m.classList.remove('on')}));
 (async()=>{applyLang();$('dt').value=nowLocal();
  if(/[#&](f|d)=/.test(location.hash))return openViewer(location.hash.slice(1));
- await purge();await load();
+ await purge();await load();await loadRc();tab(+localStorage.tab||0);
  if('serviceWorker'in navigator&&location.protocol.startsWith('http')){/* optional: add sw.js for offline */}})();
 </script></body></html>
